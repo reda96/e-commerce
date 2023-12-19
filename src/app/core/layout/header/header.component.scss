@@ -1,0 +1,24 @@
+.container {
+    padding:2%
+}
+.nav-link {
+    padding: 0;
+}
+
+
+.navbar-brand {
+    min-width: 33%;
+}
+.navbar-nav{
+    flex-direction: column;
+}
+li {
+    max-width: 70px;
+}
+
+@media only screen and (min-width: 1000px) {
+    .navbar-nav{
+        flex-direction: row;
+    }
+   
+  }

@@ -1,0 +1,19 @@
+.row {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+
+}
+
+.cards-container{
+    padding:5em;
+    max-width: 90%;
+    margin: auto;
+
+}
+
+@media only screen and (max-width: 1200px) { 
+  .cards-container{
+    display: block;
+    
+  }
+}
