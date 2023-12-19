@@ -10,13 +10,19 @@ import { Product } from '../../models/Product.model';
 })
 export class ProductsComponent implements OnInit {
   productsObs:Observable<Product[]> = this.productsService.listProducts$;
+  listCategories:Observable<string[]> = this.productsService.listCategories$;
+
   currentCategory = 'all';
   constructor(private productsService:ProductsService){}
 
 
   ngOnInit(): void {
+
     this.productsService.listAllProducts();
+    this.productsService.listAllCategories();
+
   }
+
   listAllProducts(){
     this.productsService.listAllProducts();
     this.currentCategory='all';

@@ -1,14 +1,21 @@
 <div class="row products justify-content-center"  *ngIf="productsObs | async as products"  >
+  
   <div class="col-lg-12">
     <ul class="filter__controls">
+
       <li (click)="listAllProducts()" [ngClass]="{'active mixitup-control-active': currentCategory=='all'}"  data-filter="*">All</li>
-      <li (click)="listbyCategory('men\'s clothing')" [ngClass]="{'active mixitup-control-active': currentCategory=='men\'s clothing'}">Men's clothing</li>
+      <ng-container *ngIf="listCategories | async as categories" >
+      <li *ngFor="let category of categories" (click)="listbyCategory(category)" [ngClass]="{'active mixitup-control-active': currentCategory==category}">{{category}}</li>
+    </ng-container>
+      
+      <!-- <li (click)="listbyCategory('men\'s clothing')" [ngClass]="{'active mixitup-control-active': currentCategory=='men\'s clothing'}">Men's clothing</li>
       <li (click)="listbyCategory('women\'s clothing')" [ngClass]="{'active mixitup-control-active': currentCategory=='women\'s clothing'}">Women's clothing</li>
       <li (click)="listbyCategory('jewelery')" [ngClass]="{'active mixitup-control-active': currentCategory=='jewelery'}">Jewelery</li>
-      <li (click)="listbyCategory('electronics')" [ngClass]="{'active mixitup-control-active': currentCategory=='electronics'}">Electronics</li>
+      <li (click)="listbyCategory('electronics')" [ngClass]="{'active mixitup-control-active': currentCategory=='electronics'}">Electronics</li> -->
       <!-- <li (click)="listbyCategory(6)" data-filter=".hot-sales" class="">Plants</li> -->
 
     </ul>
   </div>
   <app-products-grid [products]='products' ></app-products-grid>
+
 </div>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, map, tap } from 'rxjs';
 import { BaseService } from './base.service';
 import { Product, productInstance } from '../models/Product.model';
 
@@ -9,7 +9,9 @@ import { Product, productInstance } from '../models/Product.model';
 })
 
 export class ProductsService extends BaseService {
-  private productsSubject:BehaviorSubject<Product[] >= new BehaviorSubject([productInstance]);
+  private productsSubject= new BehaviorSubject<Product[] >([]);
+  private categoriesSubject=new BehaviorSubject<string[] >([]);
+
   constructor(private client:HttpClient) { 
     super(client);
 
@@ -17,6 +19,17 @@ export class ProductsService extends BaseService {
   get listProducts$() {
     return this.productsSubject.asObservable();
   }
+  get listCategories$() {
+    return this.categoriesSubject.asObservable();
+  }
+  public listAllCategories(){
+    return this.http.get<any>('https://dummyjson.com/products/categories', {
+      // headers: this.httpOptions.headers,
+    }).pipe((map(( categories: string[])=>categories)))
+    .subscribe(categories => this.categoriesSubject.next(categories));
+  }
+  
+  
 
   public listAllProducts(){
     this.listProducts('https://dummyjson.com/products').pipe(
