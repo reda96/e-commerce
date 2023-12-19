@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Product } from '../models/Product.model';
+// import { Product } from '../models/Product.model';
 import { map } from 'rxjs';
 export class BaseService {
   http: HttpClient;
@@ -22,6 +22,6 @@ export class BaseService {
   public listProducts(apiUrl: string) {
     return this.http.get<any>(apiUrl, {
       // headers: this.httpOptions.headers,
-    }).pipe((map(res=>res.products)));
+    }).pipe((map((res:{ products: any})=>res.products)));
   }
 }
