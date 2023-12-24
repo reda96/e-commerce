@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { BaseService } from './base.service';
-import { Product, productInstance } from '../models/Product.model';
+import { Product } from '../models/Product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ import { Product, productInstance } from '../models/Product.model';
 export class ProductsService extends BaseService {
   private productsSubject= new BehaviorSubject<Product[] >([]);
   private categoriesSubject=new BehaviorSubject<string[] >([]);
+  private productByIdSubject=new BehaviorSubject<Product | undefined>(undefined);
+
 
   constructor(private client:HttpClient) { 
     super(client);
@@ -21,6 +23,9 @@ export class ProductsService extends BaseService {
   }
   get listCategories$() {
     return this.categoriesSubject.asObservable();
+  }
+  get productByIdObs$() {
+    return this.productByIdSubject.asObservable();
   }
   public listAllCategories(){
     return this.http.get<any>('https://dummyjson.com/products/categories', {
@@ -44,6 +49,14 @@ export class ProductsService extends BaseService {
       tap(res=> {
         
         this.productsSubject.next(res);
+      })
+    ).subscribe()
+  }
+
+  public getProductById(id:number){
+    this.http.get<Product>(`https://dummyjson.com/products/${id}`).pipe(
+      tap(res=> {
+        this.productByIdSubject.next(res);
       })
     ).subscribe()
   }

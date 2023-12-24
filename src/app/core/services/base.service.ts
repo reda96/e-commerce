@@ -24,4 +24,10 @@ export class BaseService {
       // headers: this.httpOptions.headers,
     }).pipe((map((res:{ products: any})=>res.products)));
   }
+  
+  // public getProductById(apiUrl: string) {
+  //   return this.http.get<any>(apiUrl, {
+  //     // headers: this.httpOptions.headers,
+  //   });
+  // }
 }

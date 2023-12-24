@@ -1,0 +1,71 @@
+
+<div class="row" style="background-color: #f4f4f4;" *ngIf="productObs | async as product">
+  <div class="back" (click)="goBack()" ><i style="font-size: 2rem;" class=" pi pi-chevron-left" ></i>{{ " back" }}</div><br>
+  <div style="display: flex" class="col-lg-7 col-sm-12">
+    <div class="product-imgs">
+      <div *ngFor="let image of product.images;let i=index" (mouseenter)="changeImage($event,i)"  class="small-img" >
+        <img [src]="image" [alt]="" class="w-6 shadow-2" />
+      </div>
+    
+      
+      
+    
+    </div>
+    <div>
+      <p-carousel
+        styleClass="imgs_container"
+        [value]="product.images"
+        [page]="currentPage"
+        [numVisible]="1"
+        [circular]="true"
+        [showIndicators]="false"
+        [numScroll]="1"
+        orientation="horizontal"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="border-1 px-1" >
+            <div class="mb-3">
+              <img
+                [src]="product"
+                [alt]=""
+                class="carousel-img shadow-2"
+              />
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-12">
+    <div class="d-flex justify-content-between">
+      <h5>{{product.title}} </h5>
+      <i class="pi pi-heart like" ></i>
+    </div>
+    <h6>{{product.price}} EGP</h6>
+    <!-- <h5>{{product.rating}} </h5> -->
+    <label for="">Rate</label><br>
+    <p-rating [iconOnStyle]="{'color': 'black'}" [readonly]="true" [cancel]="false" [ngModel]="product.rating"></p-rating>
+    <p>{{product.description}} </p>
+
+    <button (click)="addToCart(product.id)" class=" btn primary-btn"  >
+      <ng-container *ngIf="itemStatus==1;else adding" >Add To Cart</ng-container>
+      <ng-template  #adding >
+        <ng-container *ngIf="itemStatus==2;else added" ><p-progressSpinner  ></p-progressSpinner></ng-container>
+        <ng-template #added>Selected</ng-template>
+      </ng-template>
+    </button>  
+  </div>
+
+  <div class="mt-3" *ngIf="similarProductsObs | async as similarProducts" >
+   
+    <div class="row similar"   >
+      <h5>You may also like</h5>
+      <br>
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of similarProducts" >
+          <app-grid-card [item]="product" ></app-grid-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -20,7 +20,11 @@ export class LoadingInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        this.doPrework(req);
+        {
+            // console.log(req);
+        if(!(req.method=="PUT"&&req.url.includes("https://dummyjson.com/carts")))
+            
+            this.doPrework(req);
 
 
 
@@ -33,11 +37,12 @@ export class LoadingInterceptor implements HttpInterceptor {
         return handleObs.pipe(tap(response => {
             if (response instanceof HttpResponse) {
                 // console.log("post");
+        if(!(req.method=="PUT"&&req.url.includes("https://dummyjson.com/carts")))
                 
                 this.doPostwork(response);
             }
         }));
-
+}
 
     }
 

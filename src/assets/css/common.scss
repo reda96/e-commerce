@@ -135,3 +135,7 @@ line-height: 30px;
     --bs-gutter-y: 0;
 
 }
+
+ .btn:focus {
+    box-shadow: none;
+ }

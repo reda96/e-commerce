@@ -1,6 +1,90 @@
-.p-carousel{
+.card .p-carousel{
     background-image:  url('../images/bg1.jpg')   ;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
 }
+.imgs_container {
+    width:90%;
+    text-align: center;
+}
+.p-rating-icon-active {
+    color: black !important;
+}
+.btn .p-progress-spinner {
+    width: 1rem;
+    height: 1rem;
+
+
+}
+.btn {
+    &:hover {
+        .p-progress-spinner-circle {
+            animation: none;
+            stroke: black;
+        
+        }
+    }
+    .p-progress-spinner-circle {
+    animation: none;
+    stroke: lightgray;
+
+}}
+.p-checkbox-box,
+.p-checkbox-box:hover,
+.p-checkbox-box:focus {
+    border-radius: 0 !important;
+    box-shadow: none!important;
+    border-color: #000 !important;
+    
+}
+.p-checkbox .p-checkbox-box.p-highlight ,
+.p-checkbox .p-checkbox-box.p-highlight:hover 
+{
+    border-color: #000 !important;
+    background: #000 !important;
+    box-shadow: 0;
+
+}
+.cart-item {
+    .p-inputtext, .p-button.p-button-icon-only{
+        padding: 0.3rem;
+        border-radius: 40%;
+        background-color: white;
+        color: black;
+        border:0.5px solid lightgray;
+        &:focus {
+            box-shadow: none;
+            border-color: black;
+        }
+
+        &:hover {
+            border: 1px solid black;
+            background-color: white;
+            color: black;
+        }
+    }
+    .p-inputnumber-buttons-horizontal .p-inputnumber-input	{
+        width: 100%;
+        max-width: 80px ;
+        text-align: center;
+    }
+}
+.primary-btn {
+    // width: 30ch;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1em 2em;
+    color: #ffffff;
+    background: #000000;
+    letter-spacing: 4px;
+    transition: ease-in 0.3s;
+  
+    &:hover {
+      color: black;
+      background-color: #ffffff;
+      border: 1px solid #000000;
+    }}

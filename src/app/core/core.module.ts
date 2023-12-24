@@ -12,6 +12,9 @@ import { CollectionsComponent } from './layout/collections/collections.component
 import { ProductsGridComponent } from './components/products-grid/products-grid.component';
 import { GridCardComponent } from './components/grid-card/grid-card.component';
 import { ProductsComponent } from './layout/products/products.component';
+import { ProductDetailsComponent } from './layout/product-details/product-details.component';
+import { CoreRoutingModule } from './core-routing.module';
+import { CartComponent } from './layout/cart/cart.component';
 
 
 
@@ -27,10 +30,13 @@ import { ProductsComponent } from './layout/products/products.component';
     CollectionsComponent,
     ProductsGridComponent,
     GridCardComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductDetailsComponent,
+    CartComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    CoreRoutingModule
 
   ],
   exports: [

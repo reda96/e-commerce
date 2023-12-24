@@ -1,6 +1,9 @@
-<div class="product">
+<div class="product"  >
   <div class="image-wrapper">
-    <img [src]="item.images[0]" alt="" />
+   
+    <img [src]="item.images[0]" (click)="goToDetails(item.id)"  alt="" />
+  
+ 
   </div>
   <div style="position: relative">
     <i class="pi pi-heart"></i>

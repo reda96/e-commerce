@@ -1,6 +1,6 @@
 <div class="row products justify-content-center"  *ngIf="productsObs | async as products"  >
   
-  <div class="col-lg-12">
+  <div class="col-lg-12" id= "products">
     <ul class="filter__controls">
 
       <li (click)="listAllProducts()" [ngClass]="{'active mixitup-control-active': currentCategory=='all'}"  data-filter="*">All</li>
