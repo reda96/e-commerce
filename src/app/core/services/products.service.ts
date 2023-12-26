@@ -37,7 +37,7 @@ export class ProductsService extends BaseService {
   
 
   public listAllProducts(){
-    this.listProducts('https://dummyjson.com/products').pipe(
+    this.listProducts('http://localhost:8000/api/v1/products').pipe(
       tap(res=> {
         
         this.productsSubject.next(res);
@@ -54,9 +54,9 @@ export class ProductsService extends BaseService {
   }
 
   public getProductById(id:number){
-    this.http.get<Product>(`https://dummyjson.com/products/${id}`).pipe(
+    this.http.get<{data:Product}>(`http://localhost:8000/api/v1/products/${id}`).pipe(
       tap(res=> {
-        this.productByIdSubject.next(res);
+        this.productByIdSubject.next(res.data);
       })
     ).subscribe()
   }

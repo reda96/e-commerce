@@ -22,7 +22,7 @@ export class BaseService {
   public listProducts(apiUrl: string) {
     return this.http.get<any>(apiUrl, {
       // headers: this.httpOptions.headers,
-    }).pipe((map((res:{ products: any})=>res.products)));
+    }).pipe((map((res:{ data: any})=>res.data)));
   }
   
   // public getProductById(apiUrl: string) {

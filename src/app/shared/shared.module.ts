@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 @NgModule({
   declarations: [],
   imports: [
@@ -21,7 +24,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
     RatingModule,
     ProgressSpinnerModule,
     CheckboxModule,
-    InputNumberModule
+    InputNumberModule,
+    ConfirmPopupModule,
+    OverlayPanelModule,
+    BrowserAnimationsModule   
 
     
   ],
@@ -35,7 +41,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
     RatingModule,
     ProgressSpinnerModule,
     CheckboxModule,
-    InputNumberModule
+    InputNumberModule,
+    ConfirmPopupModule,
+    OverlayPanelModule,
+    BrowserAnimationsModule
+    
 
   ]
 })

@@ -20,31 +20,14 @@ import { CartComponent } from './layout/cart/cart.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    MainLayoutComponent,
-    FooterComponent,
-    ContactUsComponent,
-    OwlCarouselComponent,
-    CardComponent,
-    LandingPageComponent,
-    CollectionsComponent,
-    ProductsGridComponent,
-    GridCardComponent,
-    ProductsComponent,
-    ProductDetailsComponent,
-    CartComponent
+
   ],
   imports: [
-    SharedModule,
     CoreRoutingModule
 
   ],
   exports: [
-    HeaderComponent,
-    FooterComponent,
-    MainLayoutComponent,
-    ContactUsComponent,
-    OwlCarouselComponent
+
   ]
 })
 export class CoreModule { }
