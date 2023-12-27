@@ -7,8 +7,8 @@ export interface CartItem {
 export interface Cart {
     
   id: number,
-  products: Product[],
-  total: number, // total was updated
+  cartItems: Product[],
+  totalCartPrice: number, // total was updated
   discountedTotal: number,  // discounted total was updated
   userId: number,
   totalProducts: number,  // total products were updated

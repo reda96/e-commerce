@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { HttpClientModule } from '@angular/common/http';
 import { RatingModule } from 'primeng/rating';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     CarouselModule,
     ButtonModule,
     TagModule,
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
   exports:[
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     CarouselModule,
     ButtonModule,
     TagModule,

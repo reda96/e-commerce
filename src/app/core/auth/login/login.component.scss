@@ -1,0 +1,64 @@
+.bg {
+    display: flex;
+    height: 100vh;
+    // background: hsl(213deg 85% 97%);
+    background: #ddd;
+}
+h4 {
+    cursor: pointer;
+&:hover{
+    color: #000;
+}
+}
+
+.container {
+    padding: 0 !important;
+    background: #fff;
+    border-radius: 10px;
+    width: 30%;
+    margin:   auto;
+    padding: 2rem;
+    overflow-y: hidden;
+    max-height: 77vh;
+    box-shadow: 1px 1px 3px  #333;
+
+}
+form {
+
+    width: 100%;
+
+    .btn {
+        width: 100%;
+    }
+}
+.signup-form>div {
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+}
+
+.signup-form {
+    h4 {
+        color: #aaa;
+    }
+    input {
+        background-color: #222;
+        color: white;
+    }
+    color: #aaa;
+    height: 60vh;
+    position:relative;
+    bottom: -5vh;
+    background-color: #222;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    transition: ease 1s;
+
+
+
+}
+.activeForm {
+    bottom: 45vh;
+    background-color: #333;
+    transition: ease 1s;
+}

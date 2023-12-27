@@ -5,6 +5,7 @@ import { CartService } from '../../services/cart.service';
 import { ADDING_TO_CART_STATUS } from '../../constants/enums';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { Product } from '../../models/Product.model';
 
 @Component({
   selector: 'app-product-details',
@@ -39,10 +40,10 @@ changeImage(event:any, imageIndex:number){
   this.currentPage=imageIndex;
   
 }
-addToCart(productId:number,){
+addToCart(product:Product){
   
   this.itemStatus = ADDING_TO_CART_STATUS.Adding;
-  this.cartService.addToCart(productId,1,1).subscribe(res=>{
+  this.cartService.addToCart(product.id,product.title).subscribe(res=>{
     
     this.itemStatus=ADDING_TO_CART_STATUS.Added;
     setTimeout(() => {

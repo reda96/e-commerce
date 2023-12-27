@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
     private _location:Location){}
 
   ngOnInit(): void {
-    this.cartService.getCartOfSpecificUser(5)
+    this.cartService.getCartOfSpecificUser();
   }
 
   goBack(){

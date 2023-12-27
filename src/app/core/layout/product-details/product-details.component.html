@@ -47,7 +47,7 @@
     <p-rating [iconOnStyle]="{'color': 'black'}" [readonly]="true" [cancel]="false" [ngModel]="product.rating"></p-rating>
     <p>{{product.description}} </p>
 
-    <button (click)="addToCart(product.id)" class=" btn primary-btn"  >
+    <button (click)="addToCart(product)" class=" btn primary-btn"  >
       <ng-container *ngIf="itemStatus==1;else adding" >Add To Cart</ng-container>
       <ng-template  #adding >
         <ng-container *ngIf="itemStatus==2;else added" ><p-progressSpinner  ></p-progressSpinner></ng-container>

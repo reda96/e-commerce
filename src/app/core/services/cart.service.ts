@@ -20,13 +20,13 @@ export class CartService extends BaseService {
   }
 
 
-  addToCart( productid:number,quantity:number, cartId:number, userId?:number){
-  return  this.client.put<Cart>(`https://dummyjson.com/carts/${cartId}`,
-    {merge:true, products:[{id:productid,quantity}]
+  addToCart( productId:number,title:string){
+  return  this.client.post<Cart>(`${this.backendUrl}/cart`,
+    {productId, color:'black',title
   }, {headers: { 'Content-Type': 'application/json' }}).
   pipe(tap((res:Cart)=>{
 
-      // console.log(res);
+       console.log(res);
     this.cartSubject.next(res);
 
       
@@ -36,12 +36,13 @@ export class CartService extends BaseService {
   }
 
 
-  getCartOfSpecificUser(userId:number){
-    this.client.get<any>(`https://dummyjson.com/carts/user/${userId}`).pipe(
+  getCartOfSpecificUser(){
+    ///api/v1/
+    this.client.get<any>(`${this.backendUrl}/cart`).pipe(
       tap((res:any)=> {
         console.log(res);
         
-        this.cartSubject.next(res.carts[0])
+        this.cartSubject.next(res.data)
       })
     ).subscribe()
 //     fetch('https://dummyjson.com/carts/user/5')

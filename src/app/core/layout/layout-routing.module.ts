@@ -3,11 +3,12 @@ import { NgModule } from "@angular/core";
 import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { ProductDetailsComponent } from "./product-details/product-details.component";
 import { CartComponent } from "./cart/cart.component";
+import {  AuthGuard } from "../guards/auth.guard";
 
 const routes: Routes = [
-    { path: "", component: LandingPageComponent },
+    { path: "",  component: LandingPageComponent },
     { path: "item/:id", component: ProductDetailsComponent },
-    { path: "cart", component: CartComponent },
+    { path: "cart",canActivate:[AuthGuard], component: CartComponent },
 
 
 

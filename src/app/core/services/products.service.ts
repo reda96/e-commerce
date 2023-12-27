@@ -28,7 +28,7 @@ export class ProductsService extends BaseService {
     return this.productByIdSubject.asObservable();
   }
   public listAllCategories(){
-    return this.http.get<any>('https://dummyjson.com/products/categories', {
+    return this.http.get<any>('/products/categories', {
       // headers: this.httpOptions.headers,
     }).pipe((map(( categories: string[])=>categories)))
     .subscribe(categories => this.categoriesSubject.next(categories));
@@ -37,7 +37,7 @@ export class ProductsService extends BaseService {
   
 
   public listAllProducts(){
-    this.listProducts('http://localhost:8000/api/v1/products').pipe(
+    this.listProducts('/products').pipe(
       tap(res=> {
         
         this.productsSubject.next(res);
@@ -45,7 +45,7 @@ export class ProductsService extends BaseService {
     ).subscribe()
   }
   public listByCategory(category:string){
-    this.listProducts(`https://dummyjson.com/products/category/${category}`).pipe(
+    this.listProducts(`/products/category/${category}`).pipe(
       tap(res=> {
         
         this.productsSubject.next(res);
@@ -54,7 +54,7 @@ export class ProductsService extends BaseService {
   }
 
   public getProductById(id:number){
-    this.http.get<{data:Product}>(`http://localhost:8000/api/v1/products/${id}`).pipe(
+    this.http.get<{data:Product}>(`${this.backendUrl}/products/${id}`).pipe(
       tap(res=> {
         this.productByIdSubject.next(res.data);
       })
