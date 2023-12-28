@@ -12,7 +12,6 @@
           <input
             autocomplete="false"
             class="form-control"
-            id="email"
             type="email"
             pInputText
             formControlName="email"
@@ -29,7 +28,6 @@
           <div class="input-container">
             <input
               class="form-control"
-              id="float-input1"
               type="password"
               pInputText
               formControlName="password"
@@ -48,7 +46,6 @@
           <input
             type="checkbox"
             class="form-check-input"
-            id="customCheck"
             name="example1"
           />
           <label
@@ -78,7 +75,7 @@
   </form>
 
 
-  <form class="signup-form" [ngClass]="activeForm=='signup'?'activeForm':''"  >
+  <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="signup()"  [ngClass]="activeForm=='signup'?'activeForm':''"  >
     <h4 (click)="activeForm='signup'" style="text-align: center;" >Sign up</h4>
 
     
@@ -87,7 +84,6 @@
         <input
           autocomplete="false"
           class="form-control"
-          id="name"
           type="name"
           pInputText
           formControlName="name"
@@ -100,7 +96,6 @@
         <input
           autocomplete="false"
           class="form-control"
-          id="email"
           type="email"
           pInputText
           formControlName="email"
@@ -117,7 +112,6 @@
         <div class="input-container">
           <input
             class="form-control"
-            id="float-input1"
             type="password"
             pInputText
             formControlName="password"
@@ -139,10 +133,9 @@
         <div class="input-container">
           <input
             class="form-control"
-            id="float-input1"
             type="password"
             pInputText
-            formControlName="password"
+            formControlName="passwordConfirm"
           />
         </div>
 

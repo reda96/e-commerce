@@ -11,6 +11,6 @@ export interface Cart {
   totalCartPrice: number, // total was updated
   discountedTotal: number,  // discounted total was updated
   userId: number,
-  totalProducts: number,  // total products were updated
+  numOfCartItems: number,  // total products were updated
   totalQuantity: number  // total quantity was updated
 }

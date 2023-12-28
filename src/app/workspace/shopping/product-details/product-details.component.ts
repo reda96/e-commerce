@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { CartService } from '../../services/cart.service';
-import { ADDING_TO_CART_STATUS } from '../../constants/enums';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { Product } from '../../models/Product.model';
+import { ADDING_TO_CART_STATUS } from 'src/app/core/constants/enums';
+import { ProductsService } from 'src/app/core/services/products.service';
+import { CartService } from 'src/app/core/services/cart.service';
+import { Product } from 'src/app/core/models/Product.model';
 
 @Component({
   selector: 'app-product-details',

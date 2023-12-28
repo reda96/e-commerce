@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { FooterComponent } from './footer/footer.component';
 import { ContactUsComponent } from '../components/contact-us/contact-us.component';
 import { OwlCarouselComponent } from '../components/owl-carousel/owl-carousel.component';
 import { CardComponent } from '../components/card/card.component';
@@ -13,16 +10,14 @@ import { GridCardComponent } from '../components/grid-card/grid-card.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
-import { LayoutRoutingModule } from './layout-routing.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
+import { CoreRoutingModule } from './core-routing.module';
 
 
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    MainLayoutComponent,
-    FooterComponent,
+
     ContactUsComponent,
     OwlCarouselComponent,
     CardComponent,
@@ -35,16 +30,22 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CartComponent,
   ],
   imports: [
+    
     SharedModule,
-    LayoutRoutingModule
-
+    CoreRoutingModule
   ],
   exports: [
-    HeaderComponent,
-    FooterComponent,
-    MainLayoutComponent,
+ 
     ContactUsComponent,
-    OwlCarouselComponent
+    OwlCarouselComponent,
+    CardComponent,
+    LandingPageComponent,
+    CollectionsComponent,
+    ProductsGridComponent,
+    GridCardComponent,
+    ProductsComponent,
+    ProductDetailsComponent,
+    CartComponent,
   ]
 })
-export class LayoutModule { }
+export class CoreModule { }

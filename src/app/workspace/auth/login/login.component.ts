@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../models/user.model';
 import {  Router } from '@angular/router';
+import { tap } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   myForm!: FormGroup;
   signupForm!: FormGroup;
   constructor(private fb: FormBuilder,private authservice:AuthService,
+    private cartService:CartService,
     private router:Router){
    
   }
@@ -28,13 +30,17 @@ export class LoginComponent implements OnInit {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password:['', [Validators.required]],
-      confirmPassword:['', [Validators.required]],
+      passwordConfirm:['', [Validators.required]],
     });
   }
 
   login(){
     if(this.myForm.valid)
-    this.authservice.logIn(this.myForm.value).subscribe(({user, token})=>{
+    this.authservice.logIn(this.myForm.value)
+    .pipe((tap((res)=>{
+      this.cartService.getCartOfSpecificUser();
+    })))
+    .subscribe(({user, token})=>{
        sessionStorage.setItem('token',token);
         this.router.navigateByUrl('/')
          
@@ -43,8 +49,14 @@ export class LoginComponent implements OnInit {
      else this.myForm.reset();
   }
   signup(){
+    console.log(this.signupForm);
+    
     if(this.signupForm.valid)
-    this.authservice.logIn(this.signupForm.value).subscribe(({user, token})=>{
+    this.authservice.signUp(this.signupForm.value)
+    .pipe((tap((res)=>{
+      this.cartService.getCartOfSpecificUser();
+    })))
+    .subscribe(({user, token})=>{
        sessionStorage.setItem('token',token);
         this.router.navigateByUrl('/')
          

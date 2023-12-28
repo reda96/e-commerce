@@ -28,10 +28,15 @@ export class ProductsService extends BaseService {
     return this.productByIdSubject.asObservable();
   }
   public listAllCategories(){
-    return this.http.get<any>('/products/categories', {
+    return this.http.get<any>(`${this.backendUrl}/categories`, {
       // headers: this.httpOptions.headers,
-    }).pipe((map(( categories: string[])=>categories)))
-    .subscribe(categories => this.categoriesSubject.next(categories));
+    })
+    // .pipe((map(( categories: string[])=>categories)))
+    .subscribe(categories => {
+      // console.log(categories);1
+      
+      // this.categoriesSubject.next(categories)
+    });
   }
   
   

@@ -15,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
@@ -23,30 +22,29 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     TagModule,
     HttpClientModule,
     RatingModule,
-    ProgressSpinnerModule,
+    // ProgressSpinnerModule,
     CheckboxModule,
     InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
-    BrowserAnimationsModule   
+    // BrowserAnimationsModule   
 
     
   ],
   exports:[
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
     ButtonModule,
     TagModule,
-    HttpClientModule,
+    // HttpClientModule,
     RatingModule,
     ProgressSpinnerModule,
     CheckboxModule,
     InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
-    BrowserAnimationsModule
+    // BrowserAnimationsModule
     
 
   ]

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../models/Product.model';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/core/models/Product.model';
 
 @Component({
   selector: 'app-grid-card',

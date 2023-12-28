@@ -9,8 +9,11 @@
    
     </div> 
    </div>
-<ng-container  *ngIf="loggedInUserObs | async as user; else auth" >
-  <app-main-layout></app-main-layout></ng-container>
-  <ng-template #auth >
+<ng-container   >
+  <app-main-layout>
+<router-outlet></router-outlet>
+
+  </app-main-layout></ng-container>
+  <!-- <ng-template #auth >
     <app-login></app-login>
-  </ng-template>
+  </ng-template> -->

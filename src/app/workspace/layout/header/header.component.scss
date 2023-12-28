@@ -25,6 +25,14 @@ li {
         display: none
     }
 
+.sup {
+   padding: 0.2rem 0.3rem;
+    background-color: red;
+    border-radius: 50%; 
+    color: white;
+    font-weight: bold;
+    font-family: cursive;
+}
 @media only screen and (min-width: 1000px) {
     .navbar-nav{
         flex-direction: row;

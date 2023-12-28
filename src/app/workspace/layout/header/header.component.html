@@ -103,12 +103,14 @@
               <p-overlayPanel #op>
                 <img src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" alt="product" />
             </p-overlayPanel>
+            <ng-container *ngIf="cartObs | async as cart" >
               <a class="px-2 " href=""> <i class="pi pi-search" style="font-size: 1rem"></i> </a>
               <a class="px-2 " href=""> <i class="pi pi-heart" style="font-size: 1rem"></i> </a> 
               <a class="px-2 "  routerLink="cart"  >
-                <i class="pi pi-shopping-cart" style="font-size: 1rem"><sup style="color: red;font-weight: bold;font-size: 1.2rem;font-family: cursive;" >2</sup></i
+                <i class="pi pi-shopping-cart" style="font-size: 1rem"><sup class="sup"  >{{ cart.cartItems?cart.cartItems.length : 0 }}</sup></i
               ></a>
-              <span class="px-2">$0.00</span>
+              <span class="px-2">{{cart.totalCartPrice}} EGP</span>
+            </ng-container>
           
           </div>
         </form>
