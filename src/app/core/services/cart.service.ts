@@ -24,10 +24,9 @@ export class CartService extends BaseService {
   return  this.client.post<Cart>(`${this.backendUrl}/cart`,
     {productId, color:'black',title
   }, {headers: { 'Content-Type': 'application/json' }}).
-  pipe(tap((res:Cart)=>{
+  pipe(tap((res:any)=>{
 
-       console.log(res);
-    this.cartSubject.next(res);
+    this.cartSubject.next(res.data);
 
       
   }))
@@ -40,7 +39,6 @@ export class CartService extends BaseService {
     ///api/v1/
     this.client.get<any>(`${this.backendUrl}/cart`).pipe(
       tap((res:any)=> {
-        console.log(res);
         
         this.cartSubject.next(res.data)
       })
@@ -49,4 +47,34 @@ export class CartService extends BaseService {
 // .then(res => res.json())
 // .then(console.log);
   }
+
+  clearCartItems()
+{
+  this.client.delete<any>(`${this.backendUrl}/cart`).pipe(
+    tap((res:any)=> {
+
+      
+      this.cartSubject.next(res.data)
+    })
+  ).subscribe()
+}
+
+removeItemFromCart(id:number){
+  this.client.delete<any>(`${this.backendUrl}/cart/${id}`).pipe(
+    tap((res:any)=> {
+      
+      this.cartSubject.next(res.data)
+    })
+  ).subscribe()
+}
+updateCartItemQuantity(id:number,quantity:number){
+ return this.client.put<any>(`${this.backendUrl}/cart/${id}`,
+  {quantity}).pipe(
+    tap((res:any)=> {
+      
+      this.cartSubject.next(res.data)
+    })
+  )
+}
+
 }

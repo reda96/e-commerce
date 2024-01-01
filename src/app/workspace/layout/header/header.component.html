@@ -67,7 +67,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink=""> <div class="header__logo">
-      <img src="../../../../assets/images/logo.png" alt=""
+      <img src="/assets/images/logo.png" alt=""
         />
       </div></a>
       
@@ -97,22 +97,28 @@
         <form class="d-flex">
           <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button> -->
-          
-            <div class="px-2 py-2">
-              <a class="px-2 " href=""> <i (mouseenter)="op.toggle($event)" class="pi pi-user" style="font-size: 1rem"></i> </a>
-              <p-overlayPanel #op>
-                <img src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" alt="product" />
-            </p-overlayPanel>
+            
+            <div class="px-2 py-2" *ngIf="loggedInUserObs | async; else in">
+              
             <ng-container *ngIf="cartObs | async as cart" >
-              <a class="px-2 " href=""> <i class="pi pi-search" style="font-size: 1rem"></i> </a>
-              <a class="px-2 " href=""> <i class="pi pi-heart" style="font-size: 1rem"></i> </a> 
-              <a class="px-2 "  routerLink="cart"  >
-                <i class="pi pi-shopping-cart" style="font-size: 1rem"><sup class="sup"  >{{ cart.cartItems?cart.cartItems.length : 0 }}</sup></i
-              ></a>
+              <span class="px-2 " href=""> <i class="pi pi-search" style="font-size: 1rem"></i> </span>
+              <span routerLink="whishlist" class="px-2 " href=""> <i class="pi pi-heart" style="font-size: 1rem"></i> </span> 
+              <span class="px-2 "  routerLink="cart"  >
+                <i class="pi pi-shopping-cart" style="font-size: 1rem"><sup class="sup"  >{{ cart.cartItems.length }}</sup></i
+              ></span>
               <span class="px-2">{{cart.totalCartPrice}} EGP</span>
             </ng-container>
+            <i (click)="logout()" class="pi pi-sign-out" style="font-size: 1rem"></i>
+
           
           </div>
+          <ng-template #in>
+            <div  class="px-2 " href=""> <i (mouseenter)="op.toggle($event)" class="pi pi-user" style="font-size: 1rem"></i> </div>
+            <p-menu #op [model]="items" [popup]="true"></p-menu> 
+            <!-- <p-overlayPanel #op>
+                <img src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" alt="product" />
+            </p-overlayPanel> -->
+          </ng-template>
         </form>
       </div>
     </div>

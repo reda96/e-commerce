@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
    
   }
   ngOnInit(): void {
+    window.scroll(100,100)
     this.myForm = this.fb.group({
      
       email: ['', [Validators.required, Validators.email]],
@@ -38,10 +39,10 @@ export class LoginComponent implements OnInit {
     if(this.myForm.valid)
     this.authservice.logIn(this.myForm.value)
     .pipe((tap((res)=>{
+      sessionStorage.setItem('token',res.token);
       this.cartService.getCartOfSpecificUser();
     })))
     .subscribe(({user, token})=>{
-       sessionStorage.setItem('token',token);
         this.router.navigateByUrl('/')
          
     })  

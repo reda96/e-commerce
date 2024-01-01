@@ -12,6 +12,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MenuModule } from 'primeng/menu';
 @NgModule({
   declarations: [],
   imports: [
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
+    MenuModule
     // BrowserAnimationsModule   
 
     
@@ -44,6 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
+    MenuModule
     // BrowserAnimationsModule
     
 

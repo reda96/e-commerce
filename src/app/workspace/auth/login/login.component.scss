@@ -21,6 +21,7 @@ h4 {
     overflow-y: hidden;
     max-height: 77vh;
     box-shadow: 1px 1px 3px  #333;
+    min-width: 300px;
 
 }
 form {
@@ -38,12 +39,16 @@ form {
 }
 
 .signup-form {
+
     h4 {
         color: #aaa;
     }
     input {
         background-color: #222;
         color: white;
+        &::placeholder{
+            color: #aaa;
+        }
     }
     color: #aaa;
     height: 60vh;

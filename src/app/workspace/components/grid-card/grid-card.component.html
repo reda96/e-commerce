@@ -6,9 +6,15 @@
  
   </div>
   <div style="position: relative">
-    <i class="pi pi-heart"></i>
-    <a href="#" class="add-cart">+ Add To Cart</a>
-    <div class="name"> {{item.title }} </div >
+    <i class="pi pi-heart-fill" *ngIf="user?.wishlist?.includes(item.id); else:empty "  (click)="removeFromFavorites(item)" ></i>
+   
+    <ng-template #empty>
+    <i class="pi pi-heart" (click)="addToFavorites(item)" ></i>
+
+    </ng-template>
+
+    <button  (click)="addToCart(item)" class="add-cart">+ Add To Cart</button>
+    <div (click)="addToCart(item)" class="name"> {{item.title }} </div >
     <p>{{item.price}} EGP</p>
   </div>
 </div>

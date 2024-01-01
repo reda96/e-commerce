@@ -9,20 +9,20 @@ export class LoggedInAuthGuard implements CanActivate {
 
     canActivate(  route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): any {
-            console.log("in");
             
         if (
-            !sessionStorage.getItem('token') &&
-            !localStorage.getItem('token')
+            !sessionStorage.getItem('token') 
           ) {
-            this.router.navigate(['login'], {
-              queryParams: { returnUrl: state.url },
-            });
+            // this.router.navigate(['login'], {
+            //   queryParams: { returnUrl: state.url },
+            // });
+            
             return true;
           }
-          this.router.navigate([''], {
+          else
+{          this.router.navigate([''], {
           });
-          return false;
+          return false;}
         //   this.authService.validateToken()
         //   return  this.authService.loggedInUserObs$;
     }

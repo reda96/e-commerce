@@ -30,8 +30,9 @@ ngOnInit(): void {
   });
   this.productSubscription= this.productObs.subscribe(product=>
     {
-      if(product)
-       this.productsService.listByCategory(product.category) }
+      // if(product)
+      //  this.productsService.listByCategory(product.category) 
+      }
     )
   
    

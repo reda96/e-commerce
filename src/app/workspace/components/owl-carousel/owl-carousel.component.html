@@ -1,27 +1,36 @@
 <div class="card">
-    <!-- [autoplayInterval]="5000" -->
-    <p-carousel [value]="products" [numVisible]="1"
+  <!-- [autoplayInterval]="5000" -->
+  <p-carousel
+    [value]="products"
+    [numVisible]="1"
+    [circular]="true"
+    contentClass="content" 
     
-    [numScroll]="3" [circular]="true"  [responsiveOptions]="responsiveOptions">
-        <ng-template let-product pTemplate="item">
-            <div class="border-1  m-2 text-center item " >
-              
-                <div class="details" >
-                    <h6 class="mb-1">Formal Collection</h6>
-                    <h2 class="mt-0 mb-3">Fall - Winter Collections 2030</h2>
-                    <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                        commitment to exceptional quality.</p>
-                    <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag> -->
-                        <a href="#products" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                    <!-- <div class="car-buttons mt-5">
+  >
+    <ng-template let-product pTemplate="item">
+      <div class="border-1 m-2 text-center item">
+        <div class="details">
+          <h6 class="mb-1">{{ product.name }}</h6>
+          <h2 class="mt-0 mb-3">{{ product.description }}</h2>
+          <!-- <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
+                        commitment to exceptional quality.</p> -->
+          <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag> -->
+          <a href="#products" class="primary-btn"
+            >Shop now <span class="arrow_right"></span
+          ></a>
+          <!-- <div class="car-buttons mt-5">
                         <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
                         <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
                     </div> -->
-                </div>
-                <div class="mb-3">
-                    <img src="/assets/images/forma.png" [alt]="product.name" width="300px" height="500px" class="w-6 shadow-2" />
-                </div>
-            </div>
-        </ng-template>
-    </p-carousel>
+        </div>
+        <div>
+          <img
+            [src]="product.image"
+            [alt]="product.name"
+            [height]="product.height"
+          />
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
 </div>

@@ -10,7 +10,7 @@ import { ProductsService } from 'src/app/core/services/products.service';
 })
 export class ProductsComponent implements OnInit {
   productsObs:Observable<Product[]> = this.productsService.listProducts$;
-  listCategories:Observable<string[]> = this.productsService.listCategories$;
+  listCategories:Observable<any[]> = this.productsService.listCategories$;
 
   currentCategory = 'all';
   constructor(private productsService:ProductsService){}

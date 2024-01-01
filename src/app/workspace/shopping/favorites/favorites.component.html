@@ -1,0 +1,21 @@
+<div class="p-3" style="background-color: #f4f4f4">
+    <div class="back" (click)="goBack()" ><i style="font-size: 2rem;" class=" pi pi-chevron-left" ></i>{{ " back" }}</div><br>
+
+    <br />
+
+    <ng-container *ngIf="filteredProductsObs | async as products">
+        <div class="d-flex cart-item">
+            <h4 class="col-12" >My Favorites</h4>
+            
+        
+            
+           
+              <div *ngFor="let product of products" class="col-xl-3  col-lg-4 col-sm-5 justify-content-between  mt-2">
+             
+                <app-grid-card [item]="product" ></app-grid-card>
+              </div>
+        
+       
+        </div>
+      </ng-container>
+</div>

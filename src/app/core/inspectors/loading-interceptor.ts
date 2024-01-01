@@ -13,11 +13,11 @@ import { SpinnerService } from '../services/loading.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
-    router!: Router;
+    // router!: Router;
     loadingExemptedUrls: string[] = [];
     clonedRequest!:HttpRequest<any>;
     
-    constructor(private spinnerService: SpinnerService) { }
+    constructor(private spinnerService: SpinnerService, private router:Router) { }
     intercept(
         req: HttpRequest<any>,
         next: HttpHandler
@@ -31,13 +31,18 @@ export class LoadingInterceptor implements HttpInterceptor {
 
 
         let handleObs: Observable<HttpEvent<any>>;
+        
        this.clonedRequest = req.clone({ headers: req.headers.append('authorization', 'Bearer '+ sessionStorage.getItem('token'))});
         handleObs = next.handle(this.clonedRequest).pipe(catchError((errorResponse, caught) => {
             //console.log('Caught error ', errorResponse);
+            if(errorResponse?.error.error.name =="JsonWebTokenError")
+            this.router.navigateByUrl('/login')
             this.spinnerService.hide();
             return observableThrowError(errorResponse);
         }));
-        return handleObs.pipe(tap(response => {
+        return handleObs.pipe(
+            tap(response => {
+            
             if (response instanceof HttpResponse) {
                 // console.log("post");
         if(!(req.method=="PUT"&&req.url.includes("https://dummyjson.com/carts")))

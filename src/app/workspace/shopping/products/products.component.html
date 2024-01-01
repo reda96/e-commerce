@@ -5,7 +5,7 @@
 
       <li (click)="listAllProducts()" [ngClass]="{'active mixitup-control-active': currentCategory=='all'}"  data-filter="*">All</li>
       <ng-container *ngIf="listCategories | async as categories" >
-      <li *ngFor="let category of categories" (click)="listbyCategory(category)" [ngClass]="{'active mixitup-control-active': currentCategory==category}">{{category}}</li>
+      <li *ngFor="let category of categories" (click)="listbyCategory(category._id)" [ngClass]="{'active mixitup-control-active': currentCategory==category._id}">{{category.name}}</li>
     </ng-container>
       
       <!-- <li (click)="listbyCategory('men\'s clothing')" [ngClass]="{'active mixitup-control-active': currentCategory=='men\'s clothing'}">Men's clothing</li>

@@ -2,9 +2,11 @@
     display: flex;
     justify-content: space-around;
 }
+
 .details {
-    margin: 10rem;
-    width: 40%;
+    // margin: 10rem;
+    margin-top: 15rem;
+    width: 35%;
     text-wrap: balance;
 
 }
@@ -17,4 +19,8 @@
     color: #ffffff;
     background: #000000;
     letter-spacing: 4px;
+}
+img {
+    margin-left: -10rem;
+    margin-top: 4rem;
 }

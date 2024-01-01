@@ -7,21 +7,19 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
-  declarations: [
-  HeaderComponent,
-  FooterComponent,
-  MainLayoutComponent
-  ],
+  declarations: [HeaderComponent, FooterComponent, MainLayoutComponent],
   imports: [
     CommonModule,
     OverlayPanelModule,
     // BrowserModule,
-    HttpClientModule
-    
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MenuModule,
   ],
-  exports:[MainLayoutComponent]
+  exports: [MainLayoutComponent],
 })
-export class LayoutModule { }
+export class LayoutModule {}

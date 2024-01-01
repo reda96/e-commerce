@@ -98,7 +98,10 @@ a {
         color: #e53637;
         }
     }
-  a{
+    .pi-heart-fill{
+        color: #e53637;
+    }
+  a, button{
         // cursor: pointer;
         font-size: 15px;
         color: #e53637;
@@ -113,7 +116,7 @@ a {
         transition: all, 0.3s;
     
   }
-   &:hover  a {
+   &:hover  a, &:hover  button {
         cursor: pointer;
          top: 0px;
         opacity: 1;

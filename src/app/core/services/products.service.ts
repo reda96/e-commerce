@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { BaseService } from './base.service';
 import { Product } from '../models/Product.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,20 @@ import { Product } from '../models/Product.model';
 
 export class ProductsService extends BaseService {
   private productsSubject= new BehaviorSubject<Product[] >([]);
+  private filteredProductsSubject= new BehaviorSubject<Product[] >([]);
   private categoriesSubject=new BehaviorSubject<string[] >([]);
   private productByIdSubject=new BehaviorSubject<Product | undefined>(undefined);
 
 
-  constructor(private client:HttpClient) { 
+  constructor(private client:HttpClient, private authService:AuthService) { 
     super(client);
 
   }
   get listProducts$() {
     return this.productsSubject.asObservable();
+  }
+  get filteredProducts$() {
+    return this.filteredProductsSubject.asObservable();
   }
   get listCategories$() {
     return this.categoriesSubject.asObservable();
@@ -33,15 +38,26 @@ export class ProductsService extends BaseService {
     })
     // .pipe((map(( categories: string[])=>categories)))
     .subscribe(categories => {
-      // console.log(categories);1
+      //  console.log(categories);
       
-      // this.categoriesSubject.next(categories)
+       this.categoriesSubject.next(categories.data)
     });
   }
   
   
 
+  public listFilteredProducts( filters?:any){
+    // console.log("filters: ", filters);
+    
+    this.listProducts('/products',filters).pipe(
+      tap(res=> {
+        
+        this.filteredProductsSubject.next(res);
+      })
+    ).subscribe()
+  }
   public listAllProducts(){
+    
     this.listProducts('/products').pipe(
       tap(res=> {
         
@@ -50,7 +66,7 @@ export class ProductsService extends BaseService {
     ).subscribe()
   }
   public listByCategory(category:string){
-    this.listProducts(`/products/category/${category}`).pipe(
+    this.listProducts(`/products?category=${category}`).pipe(
       tap(res=> {
         
         this.productsSubject.next(res);
@@ -65,4 +81,23 @@ export class ProductsService extends BaseService {
       })
     ).subscribe()
   }
+
+  public addToFavorites(product:Product){
+    
+    this.http.post<{data:any}>(`${this.backendUrl}/wishlist`,{
+      productId: product.id
+    }).pipe(
+      tap(()=> this.authService.validateToken())
+    )
+    .subscribe()
+  }
+  public removeFromFavorites(product:Product){
+    
+    this.http.delete<{data:any}>(`${this.backendUrl}/wishlist/${product.id}`).pipe(
+      tap(()=> this.authService.validateToken())
+    ).subscribe()
+  }
+  destroyFilteredProducts(){{
+    this.filteredProductsSubject.next([]);
+  }}
 }

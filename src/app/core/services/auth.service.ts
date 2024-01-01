@@ -61,9 +61,7 @@ export class AuthService extends BaseService {
         
         tap(({data}:any)=>{
     
-           console.log(data);
         this.loggedInUserSub.next(data);
-    
           
       })).subscribe()
        

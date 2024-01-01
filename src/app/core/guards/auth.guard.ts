@@ -13,7 +13,6 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): any {
-    console.log("in");
     
     if (
       !sessionStorage.getItem('token') &&

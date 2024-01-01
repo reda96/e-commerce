@@ -15,29 +15,27 @@ export class OwlCarouselComponent implements OnInit {
     ngOnInit() {
        this.products=[
         {
-          id: '1000',
-          code: 'f230fh0g3',
-          name: 'Bamboo Watch',
-          description: 'Product Description',
-          image: 'bamboo-watch.jpg',
-          price: 65,
-          category: 'Accessories',
-          quantity: 24,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-      },
+          name: 'female collections',
+          description: 'female winter collection with offers',
+          image: '/assets/images/female-model.png',
+          category:'',
+          height: '500'
+    
+        },
       {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-    },
+        name: 'male winter collections',
+        description: 'Buy 2 get 3rd free',
+        image: '/assets/images/male-model.png',
+        category:'',
+        height: '470'
+    
+    },{
+        name: 'kids winter collections',
+        description: 'Buy 2 get 3rd free',
+        image: '/assets/images/kid-model.png',
+        height: '520',
+        category:''
+    }
        ]
 
         this.responsiveOptions = [

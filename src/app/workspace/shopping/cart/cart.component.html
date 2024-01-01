@@ -7,24 +7,28 @@
     <div class="col-8">
       <div class="d-flex cart-item">
         <p-checkbox
-          [value]="true"
+          [ngModel]="firstCartItems?.length==cart.cartItems.length"
           [binary]="true"
           inputId="binary"
           label="All Items"
+          (onChange)="deselectAll($event)"
         ></p-checkbox>
       </div>
      
-        <div *ngFor="let product of cart.cartItems" class="d-flex justify-content-between cart-item mt-2">
+        <div *ngFor="let product of firstCartItems" class="d-flex  cart-item mt-2">
+     
           <p-checkbox
             
-            [ngModel]="true"
+            [ngModel]="cart.cartItems | arrayInlcudes: product"
             [binary]="true"
-            [label]="product.title"
+            (onChange)="changeSelection($event, product, cart.cartItems)"
           ></p-checkbox>
+          <div class="  mx-3" >
+            <img [src]="product.images[0]" [alt]="" class="" />
+        </div>
+        <h6 class="col-5" >{{ product.title }}</h6>
           <div class=" ">
-            <!-- <div class=" col-5 col-lg-2  mx-3" >
-            <img [src]="product.thumbnail" [alt]="" class="" />
-        </div> -->
+           
             <div class="" >
               <span>{{ product.price }} EGP</span>
               <div class="ml-2 d-flex">
@@ -34,7 +38,8 @@
                   buttonLayout="horizontal"
                   spinnerMode="horizontal"
                   inputId="horizontal"
-           
+                  (onInput)="updateCartItemQuantity($event,product)"
+                  
                   incrementButtonIcon="pi pi-plus"
                   decrementButtonIcon="pi pi-minus"
                 ></p-inputNumber>

@@ -12,6 +12,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartComponent } from './cart/cart.component';
 import { SharedModule } from '../shared/shared.module';
 import { CoreRoutingModule } from './core-routing.module';
+import { ArrayInlcudesPipe } from 'src/app/core/pipes/array-inlcudes.pipe';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 
@@ -28,6 +30,8 @@ import { CoreRoutingModule } from './core-routing.module';
     ProductsComponent,
     ProductDetailsComponent,
     CartComponent,
+    ArrayInlcudesPipe,
+    FavoritesComponent
   ],
   imports: [
     

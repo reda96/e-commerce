@@ -5,11 +5,13 @@ import { ProductDetailsComponent } from "./product-details/product-details.compo
 import { CartComponent } from "./cart/cart.component";
 import { AuthGuard } from "src/app/core/guards/auth.guard";
 import { LoggedInAuthGuard } from "src/app/core/guards/loggedIn.guard";
+import { FavoritesComponent } from "./favorites/favorites.component";
 
 const routes: Routes = [
     { path: "", component: LandingPageComponent },
     { path: "item/:id", component: ProductDetailsComponent },
     { path: "cart",canActivate:[AuthGuard], component: CartComponent },
+    { path: "whishlist",canActivate:[AuthGuard], component: FavoritesComponent },
 
 
 
