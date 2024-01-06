@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     this.signupForm=this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password:['', [Validators.required]],
-      passwordConfirm:['', [Validators.required]],
+      password:['', [Validators.required,, Validators.minLength(8)]],
+      passwordConfirm:['', [Validators.required,(control:any)=>confirmPasswordValidator(control,this.signupForm)]],
     });
   }
 
@@ -46,11 +46,14 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/')
          
     })  
-    // console.log(this.myForm.value);
-     else this.myForm.reset();
+     else{
+     console.log(this.myForm);
+       this.myForm.reset();
+       this.myForm.markAllAsTouched()
+      }
   }
   signup(){
-    console.log(this.signupForm);
+    // console.log(this.signupForm);
     
     if(this.signupForm.valid)
     this.authservice.signUp(this.signupForm.value)
@@ -63,7 +66,21 @@ export class LoginComponent implements OnInit {
          
     })  
     // console.log(this.myForm.value);
-     else this.signupForm.reset();
+    else{
+      console.log(this.myForm);
+        this.signupForm.reset();
+        this.signupForm.markAllAsTouched()
+       }
   }
 
 }
+
+export const confirmPasswordValidator = (
+  control: AbstractControl,form:FormGroup
+): ValidationErrors | null => {
+    // console.log(control.value,form?.value );
+    
+  return control.value === form?.value.password
+    ? null
+    : { PasswordNoMatch: true };
+};

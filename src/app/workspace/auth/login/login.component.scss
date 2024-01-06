@@ -19,10 +19,13 @@ h4 {
     margin:   auto;
     padding: 2rem;
     overflow-y: hidden;
-    max-height: 77vh;
+    max-height: 80vh;
     box-shadow: 1px 1px 3px  #333;
     min-width: 300px;
 
+}
+.login-form {
+    max-height: 50vh;
 }
 form {
 
@@ -32,11 +35,20 @@ form {
         width: 100%;
     }
 }
+
+.required-msg {
+    color: #dd0000;
+    display: block;
+  }
+input.ng-invalid.ng-touched {
+    border-color:#dd0000 ;
+}
 .signup-form>div {
     padding-left: 2rem;
     padding-right: 2rem;
 
 }
+
 
 .signup-form {
 
@@ -51,9 +63,9 @@ form {
         }
     }
     color: #aaa;
-    height: 60vh;
+   height: 70vh;
     position:relative;
-    bottom: -5vh;
+    top: 13vh;
     background-color: #222;
     border-top-left-radius: 10%;
     border-top-right-radius: 10%;
@@ -63,7 +75,7 @@ form {
 
 }
 .activeForm {
-    bottom: 45vh;
+    top: -50vh;
     background-color: #333;
     transition: ease 1s;
 }

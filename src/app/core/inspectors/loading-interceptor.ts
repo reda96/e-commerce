@@ -13,6 +13,7 @@ import { SpinnerService } from '../services/loading.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
+    counter = 0;
     // router!: Router;
     loadingExemptedUrls: string[] = [];
     clonedRequest!:HttpRequest<any>;
@@ -24,18 +25,18 @@ export class LoadingInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
         {
             // console.log(req);
-        if(!(req.method=="PUT"&&req.url.includes("https://dummyjson.com/carts")))
             
             this.doPrework(req);
 
 
 
         let handleObs: Observable<HttpEvent<any>>;
-        
+        if(!req.url.includes("https://accept.paymob.com")&&!req.url.includes("https://accept.paymobsolutions.com"))
        this.clonedRequest = req.clone({ headers: req.headers.append('authorization', 'Bearer '+ sessionStorage.getItem('token'))});
+    else this.clonedRequest = req;
         handleObs = next.handle(this.clonedRequest).pipe(catchError((errorResponse, caught) => {
             //console.log('Caught error ', errorResponse);
-            if(errorResponse?.error.error.name =="JsonWebTokenError")
+            if(["JsonWebTokenError","TokenExpiredError"].includes(errorResponse?.error.error.name))
             this.router.navigateByUrl('/login')
             this.spinnerService.hide();
             return observableThrowError(errorResponse);
@@ -55,8 +56,12 @@ export class LoadingInterceptor implements HttpInterceptor {
     }
 
     private doPrework(req: HttpRequest<any>) {
-      this.spinnerService.show();
-      
+     this.counter++;
+        if(this.counter==1)
+     {
+        
+         this.spinnerService.show();
+      }
        
 
        // Pass the cloned request instead of the original request to the next handle
@@ -64,7 +69,11 @@ export class LoadingInterceptor implements HttpInterceptor {
     }
 
     private doPostwork(resp: HttpResponse<any>) {
-        this.spinnerService.hide();
+        this.counter--;
+        if(this.counter==0)
+      {
+        
+        this.spinnerService.hide();}
     }
 
     

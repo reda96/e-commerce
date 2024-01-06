@@ -1,9 +1,9 @@
 <div class="bg">
   <div class="container">
-    <div style="text-align: center;padding-top: 2rem;" >
+    <div (click)="activeForm='login'" style="text-align: center;padding-top: 2rem;" >
       <img src="/assets/images/logo.png" alt="">
     </div>
-<form style="padding: 2rem;"  [formGroup]="myForm" (ngSubmit)="login()" >
+<form (click)="activeForm='login'" style="padding: 2rem;" class="login-form"  [formGroup]="myForm" (ngSubmit)="login()" >
       <h4 (click)="activeForm='login'" style="text-align: center;" >Log in</h4>
       
         <div class="form-input field">
@@ -11,7 +11,6 @@
          
           <input
             autocomplete="false"
-            autofocus
             id="email"
             placeholder="your email"
             class="form-control"
@@ -20,7 +19,13 @@
             formControlName="email"
           />
         </div>
-      
+        <ng-container
+        [ngTemplateOutlet]="errorTemplate"
+        [ngTemplateOutletContext]="{
+          formEle:myForm.get('email')
+        }"
+      >
+      </ng-container>
   
  
       
@@ -41,6 +46,13 @@
           <div
             class="icon-eye-password icon-gray title-xsmall icon-1"
           ></div>
+          <ng-container
+          [ngTemplateOutlet]="errorTemplate"
+          [ngTemplateOutletContext]="{
+            formEle:myForm.get('password')
+          }"
+        >
+        </ng-container>
         </div>
       
 
@@ -94,6 +106,13 @@
           formControlName="name"
         />
       </div>
+      <ng-container
+      [ngTemplateOutlet]="errorTemplate"
+      [ngTemplateOutletContext]="{
+        formEle:signupForm.get('name')
+      }"
+    >
+    </ng-container>
   
     <div >
       <div class="form-input field">
@@ -107,6 +126,13 @@
           formControlName="email"
         />
       </div>
+      <ng-container
+      [ngTemplateOutlet]="errorTemplate"
+      [ngTemplateOutletContext]="{
+        formEle:signupForm.get('email')
+      }"
+    >
+    </ng-container>
     </div>
 
 
@@ -129,6 +155,14 @@
           class="icon-eye-password icon-gray title-xsmall icon-1"
         ></div>
       </div>
+
+      <ng-container
+      [ngTemplateOutlet]="errorTemplate"
+      [ngTemplateOutletContext]="{
+        formEle:signupForm.get('password')
+      }"
+    >
+    </ng-container>
     </div>
 
   
@@ -147,9 +181,18 @@
           />
         </div>
 
+
         <div
           class="icon-eye-password icon-gray title-xsmall icon-1"
         ></div>
+
+        <ng-container
+        [ngTemplateOutlet]="errorTemplate"
+        [ngTemplateOutletContext]="{
+          formEle:signupForm.get('passwordConfirm')
+        }"
+      >
+      </ng-container>
       </div>
     
 
@@ -164,5 +207,29 @@
     >Sign up</button>
   </div>
 </form>
+
+<ng-template  let-formEle="formEle"   #errorTemplate >
+  <div *ngIf="formEle.invalid && 
+  formEle.errors && 
+  (formEle.dirty || formEle.touched)"  >
+<small class="text-danger"
+  *ngIf="formEle.hasError('required')">
+  This field is required.
+</small>
+<small class="text-danger"
+  *ngIf="formEle.hasError('minlength')">
+  The minimum length for this field is {{formEle.errors.minlength.requiredLength}} characters.
+</small>
+<small class="text-danger"
+  *ngIf="formEle.hasError('email')">
+ Plaese type email in correct format.
+</small>
+<small class="text-danger"
+  *ngIf="formEle.hasError('PasswordNoMatch')">
+ passwords do not match</small>
+
+
+</div>
+</ng-template>
 </div>
 </div>

@@ -1,14 +1,14 @@
 
 <!-- <router-outlet></router-outlet> -->
-<div *ngIf="spinnerObs | async as  loading">
-    <div *ngIf="loading">
+<ng-container *ngIf="spinnerObs | async as  loading">
+    <div >
    <div class="ring">
      <span></span>
    </div>
    <img class="img" src="/assets/images/logo.png" alt="" />
    
     </div> 
-   </div>
+   </ng-container>
 <ng-container   >
   <app-main-layout>
 <router-outlet></router-outlet>

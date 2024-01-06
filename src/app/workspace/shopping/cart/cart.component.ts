@@ -8,6 +8,7 @@ import { CheckboxChangeEvent } from 'primeng/checkbox';
 import { InputNumberInputEvent } from 'primeng/inputnumber';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -23,6 +24,7 @@ export class CartComponent implements OnInit, OnDestroy {
   userSub!:Subscription;
   constructor(private _location:Location,
     private cartService:CartService,
+    private router:Router,
     private productsService:ProductsService, private authService:AuthService){
     
   }
@@ -56,8 +58,22 @@ export class CartComponent implements OnInit, OnDestroy {
     if(!event.checked)
     this.cartService.clearCartItems();
   }
+  addToFavorites(item:Product){
+    this.productsService.addToFavorites(item);
+    // this.authService.validateToken();
+  }
+  removeFromFavorites(item:Product){
+    this.productsService.removeFromFavorites(item);
+    // this.authService.validateToken();
+  }
+  deleteItem(product:any, cartItems:any[]){
+    cartItems.length ? product = cartItems.find((p)=> p.product==product.id) : null; 
+    this.cartService.removeItemFromCart(product._id);
+    // console.log(product,this.firstCartItems);
+    
+     this.firstCartItems= this.firstCartItems?.filter(p=>p.id!==product.product)
+  }
   changeSelection(event:CheckboxChangeEvent, product:any,cartItems:any[]){
-    console.log(event,product,cartItems);
     
     if(!event.checked)
   {
@@ -85,6 +101,11 @@ export class CartComponent implements OnInit, OnDestroy {
     
     this.cartService.updateCartItemQuantity(product._id,quantity).subscribe()
 
+  }
+
+  goToPaymentToken(){
+    this.cartService.getPaymobToken().subscribe(
+    )
   }
   ngOnDestroy(): void {
     this.cartSubscription?.unsubscribe();
