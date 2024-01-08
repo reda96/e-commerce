@@ -9,15 +9,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuModule } from 'primeng/menu';
+import { SearchComponent } from '../components/search/search.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, MainLayoutComponent],
+  declarations: [HeaderComponent,SearchComponent, FooterComponent, MainLayoutComponent],
   imports: [
     CommonModule,
     OverlayPanelModule,
     // BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SharedModule,
     MenuModule,
   ],
   exports: [MainLayoutComponent],

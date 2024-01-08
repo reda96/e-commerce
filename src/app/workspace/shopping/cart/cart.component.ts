@@ -45,7 +45,7 @@ export class CartComponent implements OnInit, OnDestroy {
     ).subscribe((res:Product[])=> {
       
       if(!this.firstCartItems?.length)
-      this.firstCartItems=res.map(p => { return {...p, quantity:cartItems?.find(i=>i.product == p.id).quantity}})
+      this.firstCartItems=res.map(p => { return {...p, quantity:cartItems?.find(i=>i.product == p.id)?.quantity}})
     
     
     })

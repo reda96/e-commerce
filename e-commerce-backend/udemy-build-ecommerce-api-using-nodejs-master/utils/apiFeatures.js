@@ -18,9 +18,11 @@ class ApiFeatures {
   }
 
   sort() {
-    if (this.queryString.sort) {
-      const sortBy = this.queryString.sort.split(',').join(' ');
-      this.mongooseQuery = this.mongooseQuery.sort(sortBy);
+    if (this.queryString.sortBy) {
+      // console.log(this.queryString);
+      const sortBy = this.queryString.sortBy.split(',').join(' ');
+      const sortType = this.queryString.sortType;
+      this.mongooseQuery = this.mongooseQuery.sort({[sortBy]: sortType});
     } else {
       this.mongooseQuery = this.mongooseQuery.sort('-createAt');
     }
@@ -55,7 +57,7 @@ class ApiFeatures {
 
   paginate(countDocuments) {
     const page = this.queryString.page * 1 || 1;
-    const limit = this.queryString.limit * 1 || 50;
+    const limit = this.queryString.limit * 1 || 20;
     const skip = (page - 1) * limit;
     const endIndex = page * limit;
 

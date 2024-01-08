@@ -11,10 +11,15 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuModule } from 'primeng/menu';
+import { GridCardComponent } from '../components/grid-card/grid-card.component';
+import { ProductsGridComponent } from '../components/products-grid/products-grid.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
-  declarations: [],
+  declarations: [ProductsGridComponent, GridCardComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -28,12 +33,12 @@ import { MenuModule } from 'primeng/menu';
     InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
-    MenuModule
-    // BrowserAnimationsModule   
-
-    
+    MenuModule,
+    DropdownModule,
+    DialogModule
+    // BrowserAnimationsModule
   ],
-  exports:[
+  exports: [
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
@@ -46,10 +51,12 @@ import { MenuModule } from 'primeng/menu';
     InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
-    MenuModule
+    MenuModule,
+    ProductsGridComponent,
+    GridCardComponent,
+    DropdownModule,
+    DialogModule
     // BrowserAnimationsModule
-    
-
-  ]
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

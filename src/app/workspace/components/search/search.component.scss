@@ -1,0 +1,30 @@
+.search {
+  position: relative;
+}
+.mask {
+  position: absolute !important;
+}
+.result {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  color: #666;
+  overflow-x: hidden;
+
+  &:hover {
+    background-color: lightgray;
+  }
+}
+.p-input {
+  border: 1px solid #dfe7ef;
+  border-radius: 5px;
+  input {
+    border: none;
+    border-radius: 5px;
+    padding-left: 0.4rem;
+    &:focus-visible {
+      outline: -webkit-focus-ring-color auto 0px;
+    }
+  }
+}

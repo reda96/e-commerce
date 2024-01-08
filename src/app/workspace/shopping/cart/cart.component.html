@@ -1,7 +1,7 @@
 <div class="p-3" style="background-color: #f4f4f4">
     <div class="back" (click)="goBack()" ><i style="font-size: 2rem;" class=" pi pi-chevron-left" ></i>{{ " back" }}</div><br>
 
-  <br />
+  
   <ng-container *ngIf="cartObs | async as cart">
   <div class="d-flex">
     <div class="col-8">
@@ -24,7 +24,7 @@
             (onChange)="changeSelection($event, product, cart.cartItems)"
           ></p-checkbox>
           <div class="  mx-3" >
-            <img [src]="product.images[0]" [alt]="" class="" />
+            <img loading="lazy" [src]="product.images[0]" [alt]="" class="" />
         </div>
         <h6 class="col-5" >{{ product.title }}</h6>
           <div class=" ">
@@ -67,11 +67,11 @@
         </div>
         <div class="cart-item mx-2 mb-2">
             <h4>We Accept</h4>
-            <img class="payment-icon" src="/assets/images/payment-icon/1.png" alt="">
-            <img class="payment-icon" src="/assets/images/payment-icon/2.png" alt="">
-            <img class="payment-icon" src="/assets/images/payment-icon/3.png" alt="">
-            <img class="payment-icon" src="/assets/images/payment-icon/5.png" alt="">
-            <img class="payment-icon" src="/assets/images/payment-icon/7.png" alt="">
+            <img loading="lazy" class="payment-icon" src="/assets/images/payment-icon/1.png" alt="">
+            <img loading="lazy" class="payment-icon" src="/assets/images/payment-icon/2.png" alt="">
+            <img loading="lazy"class="payment-icon" src="/assets/images/payment-icon/3.png" alt="">
+            <img loading="lazy"class="payment-icon" src="/assets/images/payment-icon/5.png" alt="">
+            <img loading="lazy" class="payment-icon" src="/assets/images/payment-icon/7.png" alt="">
 
         </div>
     </div>

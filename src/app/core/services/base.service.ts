@@ -21,10 +21,10 @@ export class BaseService {
 
   // secureApi: string = environment.secureApiUrl;
   // nonSecureApi: string = environment.nonSecureApiUrl;
-  public listProducts(apiUrl: string, filters?:any) {
-    return this.http.post<any>(this.backendUrl+ apiUrl, {
+  public listProducts(apiUrl: string, params?:any, filters?:any) {
+    return this.http.post<any>(this.backendUrl+ apiUrl,{filters}, {
       // headers: this.httpOptions.headers,
-      filters
+      params
     }).pipe((map((res:{ data: any})=>res.data)));
   }
   

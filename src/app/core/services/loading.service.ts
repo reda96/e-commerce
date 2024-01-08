@@ -9,7 +9,7 @@ export class SpinnerService {
   spinnerSubject: BehaviorSubject<boolean>;
 
   constructor() {
-    this.spinnerSubject = new BehaviorSubject<boolean>(true);
+    this.spinnerSubject = new BehaviorSubject<boolean>(false);
   }
 
   get spinnerState$(): Observable<boolean> {

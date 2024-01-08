@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {  NavigationEnd, Router } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 
@@ -12,6 +12,8 @@ import { CartService } from 'src/app/core/services/cart.service';
 export class HeaderComponent implements OnInit {
   cartObs = this.cartService.cartObs$;
   loggedInUserObs = this.authService.loggedInUserObs$;
+  
+  currentRoute!:string;
   userSub!:Subscription;
   items = [
     {
@@ -21,9 +23,20 @@ export class HeaderComponent implements OnInit {
       }
 
     }]
-  constructor(private cartService:CartService,private authService:AuthService,private router:Router){}
+  constructor(private cartService:CartService,
+    private authService:AuthService,
+    private router:Router,
+    ){
+      this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd))
+      .subscribe((event:NavigationEnd) => 
+       {
+          this.currentRoute = event.url;          
+          // console.log(event);
+       });
+    }
   
   ngOnInit(): void {
+
     let token =sessionStorage.getItem('token');
     if(token)
     {this.authService.validateToken()
@@ -34,6 +47,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     sessionStorage.removeItem('token');
-    this.router.navigateByUrl('login')
+    this.router.navigateByUrl('login');
+    this.authService.destroyUserObs();
   }
 }

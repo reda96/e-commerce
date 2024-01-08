@@ -13,6 +13,13 @@ const routes: Routes = [
   },
   {
     path: '',
+    loadChildren: () =>
+      import('./workspace/heighest/heighest.module').then(
+        (m) => m.HeighestModule
+      ),
+  },
+  {
+    path: '',
     canActivate:[LoggedInAuthGuard],
 
     loadChildren: () =>

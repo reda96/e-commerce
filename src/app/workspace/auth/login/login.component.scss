@@ -40,9 +40,13 @@ form {
     color: #dd0000;
     display: block;
   }
-input.ng-invalid.ng-touched {
+input{
+    &.ng-valid.ng-touched{
+        border-color:#4BB543 ;
+    }
+    &.ng-invalid.ng-touched {
     border-color:#dd0000 ;
-}
+}}
 .signup-form>div {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -78,4 +82,9 @@ input.ng-invalid.ng-touched {
     top: -50vh;
     background-color: #333;
     transition: ease 1s;
+}
+
+button {
+    text-align: center;
+    display: block;
 }

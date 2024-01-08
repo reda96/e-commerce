@@ -14,3 +14,16 @@
         background-color: transparent;
     }
 }
+.discount {
+    display: inline-block;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fa6338;
+  
+      .percentage {
+        padding:0.1rem ;
+        border: 1px solid #fa6338;
+        border-radius: 2px;
+    
+      }
+  }

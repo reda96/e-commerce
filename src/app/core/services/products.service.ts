@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { BaseService } from './base.service';
@@ -6,19 +6,18 @@ import { Product } from '../models/Product.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ProductsService extends BaseService {
-  private productsSubject= new BehaviorSubject<Product[] >([]);
-  private filteredProductsSubject= new BehaviorSubject<Product[] >([]);
-  private categoriesSubject=new BehaviorSubject<string[] >([]);
-  private productByIdSubject=new BehaviorSubject<Product | undefined>(undefined);
+  private productsSubject = new BehaviorSubject<Product[]>([]);
+  private filteredProductsSubject = new BehaviorSubject<Product[]>([]);
+  private categoriesSubject = new BehaviorSubject<string[]>([]);
+  private productByIdSubject = new BehaviorSubject<Product | undefined>(
+    undefined
+  );
 
-
-  constructor(private client:HttpClient, private authService:AuthService) { 
+  constructor(private client: HttpClient, private authService: AuthService) {
     super(client);
-
   }
   get listProducts$() {
     return this.productsSubject.asObservable();
@@ -32,72 +31,89 @@ export class ProductsService extends BaseService {
   get productByIdObs$() {
     return this.productByIdSubject.asObservable();
   }
-  public listAllCategories(){
-    return this.http.get<any>(`${this.backendUrl}/categories`, {
-      // headers: this.httpOptions.headers,
-    })
-    // .pipe((map(( categories: string[])=>categories)))
-    .subscribe(categories => {
-      //  console.log(categories);
-      
-       this.categoriesSubject.next(categories.data)
-    });
-  }
-  
-  
+  public listAllCategories() {
+    if(!this.categoriesSubject.getValue().length)
+    return (
+      this.http
+        .get<any>(`${this.backendUrl}/categories`, {
+          // headers: this.httpOptions.headers,
+        })
+        // .pipe((map(( categories: string[])=>categories)))
+        .subscribe((categories) => {
+          //  console.log(categories);
 
-  public listFilteredProducts( filters?:any){
+          this.categoriesSubject.next(categories.data);
+        })
+    );
+    return;
+  }
+
+  public listFilteredProducts(filters?: any) {
     // console.log("filters: ", filters);
-    
-    this.listProducts('/products',filters).pipe(
-      tap(res=> {
-        
-        this.filteredProductsSubject.next(res);
-      })
-    ).subscribe()
+
+    this.listProducts('/products', undefined, filters)
+      .pipe(
+        tap((res) => {
+          this.filteredProductsSubject.next(res);
+        })
+      )
+      .subscribe();
   }
-  public listAllProducts(){
+  public listAllProducts(sortBy?: string, limit?: number, sortType?: number, keyword?:string) {
+    // sort=${sortBy}&sortType=${sortType}&limit=${limit}
+    let params = new HttpParams();
+    params = sortBy ? params.append('sortBy', sortBy) : params;
+    params = sortType ? params.append('sortType', sortType) : params;
+    params = limit ? params.append('limit', limit) : params;
+    params = keyword ? params.append('keyword', keyword) : params;
+
     
-    this.listProducts('/products').pipe(
-      tap(res=> {
-        
-        this.productsSubject.next(res);
-      })
-    ).subscribe()
+    this.listProducts(`/products`,params)
+      .pipe(
+        tap((res) => {
+          this.productsSubject.next(res);
+        })
+      )
+      .subscribe();
   }
-  public listByCategory(category:string){
-    this.listProducts(`/products?category=${category}`).pipe(
-      tap(res=> {
-        
-        this.productsSubject.next(res);
-      })
-    ).subscribe()
+  public listByCategory(category: string) {
+    this.listProducts(`/products?category=${category}`)
+      .pipe(
+        tap((res) => {
+          this.productsSubject.next(res);
+        })
+      )
+      .subscribe();
   }
 
-  public getProductById(id:number){
-    this.http.get<{data:Product}>(`${this.backendUrl}/products/${id}`).pipe(
-      tap(res=> {
-        this.productByIdSubject.next(res.data);
-      })
-    ).subscribe()
+  public getProductById(id: number) {
+    this.http
+      .get<{ data: Product }>(`${this.backendUrl}/products/${id}`)
+      .pipe(
+        tap((res) => {
+          this.productByIdSubject.next(res.data);
+        })
+      )
+      .subscribe();
   }
 
-  public addToFavorites(product:Product){
-    
-    this.http.post<{data:any}>(`${this.backendUrl}/wishlist`,{
-      productId: product.id
-    }).pipe(
-      tap(()=> this.authService.validateToken())
-    )
-    .subscribe()
+  public addToFavorites(product: Product) {
+    this.http
+      .post<{ data: any }>(`${this.backendUrl}/wishlist`, {
+        productId: product.id,
+      })
+      .pipe(tap(() => this.authService.validateToken()))
+      .subscribe();
   }
-  public removeFromFavorites(product:Product){
-    
-    this.http.delete<{data:any}>(`${this.backendUrl}/wishlist/${product.id}`).pipe(
-      tap(()=> this.authService.validateToken())
-    ).subscribe()
+  public removeFromFavorites(product: Product) {
+    this.http
+      .delete<{ data: any }>(`${this.backendUrl}/wishlist/${product.id}`)
+      .pipe(tap(() => this.authService.validateToken()))
+      .subscribe();
   }
-  destroyFilteredProducts(){{
-    this.filteredProductsSubject.next([]);
-  }}
+  destroyFilteredProducts() {
+    {
+      this.filteredProductsSubject.next([]);
+    }
+  }
 }
