@@ -1,0 +1,39 @@
+<div
+  [style]="{
+    'background-color': '#f4f4f4',
+    'min-height': '80vh',
+    'margin-top': '4.2rem',
+    'padding-top': '1rem'
+  }"
+>
+  <h4 class="px-5">Order Details</h4>
+  <div class="order px-5" *ngIf="order">
+    <div>
+      <div>{{ order.createdAt | date }}</div>
+      <div  [ngStyle]="{ color: order.isPaid ? 'green' : 'red' }">
+        {{ order.isPaid ? "Successfull" : "Failed" }}
+      </div>
+      <div>Order ID: {{ order._id }}</div>
+    </div>
+    <hr>
+    <div class="details">
+        <h4 class="px-1">Order Summary</h4>
+        <ng-container  *ngFor="let item of order.cartItems" >
+        <div class="d-flex justify-content-between">
+            <span> {{item.quantity}} x {{item.product.title}} </span>
+            <span> {{item.price *item.quantity}} EGP</span>
+        </div>
+        </ng-container>
+
+        <div class="d-flex justify-content-between">
+          <span> Total </span>
+          <span> {{ order?.totalOrderPrice}} EGP</span>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <span> Payment method </span>
+        <span> {{ order?.paymentMethodType}} </span>
+    </div>
+    </div>
+  </div>
+</div>

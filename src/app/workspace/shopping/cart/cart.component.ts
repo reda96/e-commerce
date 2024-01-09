@@ -103,9 +103,11 @@ export class CartComponent implements OnInit, OnDestroy {
 
   }
 
-  goToPaymentToken(){
-    this.cartService.getPaymobToken().subscribe(
-    )
+  goToPaymentToken(cart:Cart){
+    console.log(cart);
+    
+    this.cartService.getPaymobToken(cart).subscribe(
+    );
   }
   ngOnDestroy(): void {
     this.cartSubscription?.unsubscribe();

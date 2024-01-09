@@ -110,23 +110,21 @@
   .p-dialog {
     max-width: 100%;
     .p-dialog-content {
-        overflow-x: hidden;
-        max-height: 15rem;
-        
-        padding: 0 0 0.5rem 0;
-        div {
-            padding: 0.4rem;
+      overflow-x: hidden;
+      max-height: 15rem;
 
-            &:hover {
-                background-color: lightgray;
-                cursor: pointer;
-               
-            }
+      padding: 0 0 0.5rem 0;
+      div {
+        padding: 0.4rem;
+
+        &:hover {
+          background-color: lightgray;
+          cursor: pointer;
         }
-        
       }
+    }
   }
-  
+
   .p-dialog-mask {
     position: absolute !important;
     top: 40px;
@@ -135,4 +133,23 @@
     width: auto;
     max-width: 100%;
   }
+}
+.p-menu .p-menuitem-link,
+.p-panelmenu .p-menuitem-link,
+.p-panelmenu
+  .p-panelmenu-header
+  .p-panelmenu-header-content
+  .p-panelmenu-header-action {
+  &:hover {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.p-tag {
+  margin: 0.3rem;
+ 
+  background-color: #b7b7b7 !important;
+
 }

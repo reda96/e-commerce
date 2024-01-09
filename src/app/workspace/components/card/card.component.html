@@ -3,7 +3,8 @@
         <img src="/assets/images/jacket.jpg" alt="">
     </div>
     <div class="banner__item__text">
-        <h2>Clothing <br> Collections 2030</h2>
-        <div style="width: 13ch;position: relative;" ><a href="#">Shop now</a></div>
+        <h4>Clothing <br> {{label}}</h4>
+        <div style="width: 13ch;position: relative;" 
+        ><a routerLink="shop" [state]="{ filter}"  >Shop now</a></div>
     </div>
 </div>

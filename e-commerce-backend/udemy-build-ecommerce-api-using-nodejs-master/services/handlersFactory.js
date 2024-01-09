@@ -68,7 +68,7 @@ exports.getAll = (Model, modelName = '') =>
     if(req.body?.filters){
       if(req.body?.filters.ids)
       filter = {...filter, "_id": { $in: req.body?.filters.ids}}
-      // filter = {...filter, ...req.body?.filters}
+      else filter = {...filter, ...req.body?.filters}
     }
     // Build query
     const documentsCounts = await Model.countDocuments();

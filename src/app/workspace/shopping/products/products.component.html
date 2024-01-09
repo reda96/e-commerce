@@ -1,17 +1,28 @@
-<div class="row products justify-content-center"  *ngIf="productsObs | async as products"  >
-  <div class="col-10 mt-4 mb-3 d-flex justify-content-end " >
+<div
+  class="row align-items-start products justify-content-center"
+  style="margin-left: 4rem"
+  *ngIf="products || (productsObs | async) as products"
+>
+  <div [style]="{'margin-right':'2rem'}" class="col-12 mt-4 mb-3   d-flex justify-content-end">
     <!-- <span class="mt-2 mx-3" >sortBy</span> -->
-     <p-dropdown [style]="{'width': '270px'}" [options]="sortByOptions" optionLabel="name" (onChange)="changeSortBy($event)" >
+    <p-dropdown
+      [style]="{ width: '270px' }"
+      [(ngModel)]="sortBy"
+      [options]="sortByOptions"
+      optionLabel="name"
+      (onChange)="changeSortBy($event)"
+    >
       <ng-template let-sortBy pTemplate="selectedItem">
-        <div  class="flex align-items-center gap-2" >
-            <div><span class="bold" >Sort By:</span> {{ sortBy.name }}</div>
+        <div class="flex align-items-center gap-2">
+          <div><span class="bold">Sort By:</span> {{ sortBy.name }}</div>
         </div>
-    </ng-template>
+      </ng-template>
     </p-dropdown>
-     <!-- <i class="mx-3 mt-2 pi pi-sort-amount-down" ></i>
+    <!-- <i class="mx-3 mt-2 pi pi-sort-amount-down" ></i>
      <i class="mx-3 mt-2 pi pi-sort-amount-down-alt" ></i> -->
   </div>
-  <div class="col-lg-12 mb-4 " id= "products">
+
+  <!-- <div class="col-lg-12 mb-4 " id= "products">
     <ul class="filter__controls">
 
       <li (click)="listAllProducts()" [ngClass]="{'active mixitup-control-active': currentCategory=='all'}"  data-filter="*">All</li>
@@ -19,15 +30,33 @@
       <li *ngFor="let category of categories" (click)="listbyCategory(category._id)" [ngClass]="{'active mixitup-control-active': currentCategory==category._id}">{{category.name}}</li>
     </ng-container>
       
-      <!-- <li (click)="listbyCategory('men\'s clothing')" [ngClass]="{'active mixitup-control-active': currentCategory=='men\'s clothing'}">Men's clothing</li>
-      <li (click)="listbyCategory('women\'s clothing')" [ngClass]="{'active mixitup-control-active': currentCategory=='women\'s clothing'}">Women's clothing</li>
-      <li (click)="listbyCategory('jewelery')" [ngClass]="{'active mixitup-control-active': currentCategory=='jewelery'}">Jewelery</li>
-      <li (click)="listbyCategory('electronics')" [ngClass]="{'active mixitup-control-active': currentCategory=='electronics'}">Electronics</li> -->
-      <!-- <li (click)="listbyCategory(6)" data-filter=".hot-sales" class="">Plants</li> -->
 
     </ul>
-  </div>  
-  
-  <app-products-grid [products]='products' ></app-products-grid>
+  </div>   -->
+  <div class="col-12 d-flex mb-3">
+    <div class="col-3" (click)="showFilters = !showFilters">
+      <i class="pi pi-filter"></i>
+      {{ showFilters ? "Hide Filters" : "Show Filters" }}
+    </div>
 
+    <div *ngIf="filter || currentCategory !== 'all'" class="col-9">
+      Selected Filters:
+      <p-tag
+        *ngIf="currentCategory !== 'all'"
+        (click)="currentCategory='all'; listAllProducts()"
+        icon="pi pi-times"
+        [value]="currentCategory?.name"
+      ></p-tag>
+      <p-tag (click)="filter=undefined; listAllProducts()" *ngIf="filter" icon="pi pi-times" value="Discounts"></p-tag>
+    </div>
+  </div>
+  <div *ngIf="showFilters" class="col-lg-2">
+    <p-panelMenu
+      [model]="items"
+      [style]="{ 'min-width': '200px', 'margin-left': '2rem' }"
+    ></p-panelMenu>
+  </div>
+  <div [ngClass]="showFilters ? 'col-lg-10' : 'col-lg-12'">
+    <app-products-grid [products]="products"></app-products-grid>
+  </div>
 </div>

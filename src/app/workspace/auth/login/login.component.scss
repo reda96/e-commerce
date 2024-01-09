@@ -22,6 +22,7 @@ h4 {
     max-height: 80vh;
     box-shadow: 1px 1px 3px  #333;
     min-width: 300px;
+    transition: ease-in-out 0.2s;
 
 }
 .login-form {
@@ -55,7 +56,9 @@ input{
 
 
 .signup-form {
-
+  label {
+    margin-bottom: 0.2rem;
+  }
     h4 {
         color: #aaa;
     }
@@ -67,7 +70,7 @@ input{
         }
     }
     color: #aaa;
-   height: 70vh;
+   height: 80vh;
     position:relative;
     top: 13vh;
     background-color: #222;

@@ -59,16 +59,18 @@ export class ProductsService extends BaseService {
       )
       .subscribe();
   }
-  public listAllProducts(sortBy?: string, limit?: number, sortType?: number, keyword?:string) {
+  public listAllProducts(sortBy?: string, limit?: number, sortType?: number, keyword?:string,category?:string, filters?:any) {
     // sort=${sortBy}&sortType=${sortType}&limit=${limit}
     let params = new HttpParams();
     params = sortBy ? params.append('sortBy', sortBy) : params;
     params = sortType ? params.append('sortType', sortType) : params;
     params = limit ? params.append('limit', limit) : params;
     params = keyword ? params.append('keyword', keyword) : params;
+    params = category ? params.append('category', category) : params;
+
 
     
-    this.listProducts(`/products`,params)
+    this.listProducts(`/products`,params,filters)
       .pipe(
         tap((res) => {
           this.productsSubject.next(res);

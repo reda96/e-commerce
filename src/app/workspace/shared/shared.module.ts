@@ -17,7 +17,7 @@ import { GridCardComponent } from '../components/grid-card/grid-card.component';
 import { ProductsGridComponent } from '../components/products-grid/products-grid.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
-
+import { PanelMenuModule } from 'primeng/panelmenu';
 @NgModule({
   declarations: [ProductsGridComponent, GridCardComponent],
   imports: [
@@ -35,7 +35,8 @@ import { DialogModule } from 'primeng/dialog';
     OverlayPanelModule,
     MenuModule,
     DropdownModule,
-    DialogModule
+    DialogModule,
+    PanelMenuModule
     // BrowserAnimationsModule
   ],
   exports: [
@@ -55,7 +56,8 @@ import { DialogModule } from 'primeng/dialog';
     ProductsGridComponent,
     GridCardComponent,
     DropdownModule,
-    DialogModule
+    DialogModule,
+    PanelMenuModule
     // BrowserAnimationsModule
   ],
 })

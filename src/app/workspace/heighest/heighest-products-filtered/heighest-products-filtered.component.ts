@@ -22,9 +22,7 @@ export class HeighestProductsFilteredComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
    this.subscription= this.productsService.listProducts(`/products?sort=${this.sortBy}&sortType=${this.sortType}&limit=${4}`).pipe(
       tap(res=> {
-        console.log(
-          "in heighst"
-        );
+      
         
         this.products=res;
         // this.productsSubject.next(res);

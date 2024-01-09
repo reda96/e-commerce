@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   userSub!:Subscription;
   items = [
     {
-      label: 'sing In/ Registere',
+      label: 'sign In/ Register',
       command: () => {
         this.router.navigateByUrl('/login')
       }

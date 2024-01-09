@@ -34,13 +34,18 @@ export class LoadingInterceptor implements HttpInterceptor {
         if(!req.url.includes("https://accept.paymob.com")&&!req.url.includes("https://accept.paymobsolutions.com"))
        this.clonedRequest = req.clone({ headers: req.headers.append('authorization', 'Bearer '+ sessionStorage.getItem('token'))});
     else this.clonedRequest = req;
-        handleObs = next.handle(this.clonedRequest).pipe(catchError((errorResponse, caught) => {
-            //console.log('Caught error ', errorResponse);
-            if(["JsonWebTokenError","TokenExpiredError"].includes(errorResponse?.error.error.name))
-            this.router.navigateByUrl('/login')
+       
+        handleObs = next.handle(this.clonedRequest).pipe(
+            catchError((errorResponse, caught) => {
+            // console.log('Caught error ', errorResponse);
+            if(["JsonWebTokenError","TokenExpiredError"].includes(errorResponse?.error?.error?.name))
+         {
             this.spinnerService.hide();
+            this.router.navigateByUrl('/login')}
+          
             return observableThrowError(errorResponse);
-        }));
+        })
+        );
         return handleObs.pipe(
             tap(response => {
             

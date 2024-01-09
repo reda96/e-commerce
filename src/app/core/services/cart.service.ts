@@ -82,16 +82,25 @@ export class CartService extends BaseService {
       );
   }
 
-  getPaymobToken() {
+  getPaymobToken(cart:Cart) {
     return this.client
       .post(
-        `https://accept.paymob.com/api/auth/tokens`,
+        `${this.backendUrl}/orders/${cart._id}`,
         {
-          api_key: `ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RVd01ESTNMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuSUJ2MUdjTXZ3S2F4UVFGODBleGZUXzJOZGVNaDVJYkt6OF9HcXpiWEltdXM2Q0FNNkRWRXRsNXJDNEtYRzZmdDN0UkxuWjNCR0pGd2JRdjhQZkI5RXc=`,
         },
         { headers: { 'Content-Type': 'application/json' } }
       )
       .pipe(
+        switchMap(()=>{
+          return this.client
+          .post(
+            `https://accept.paymob.com/api/auth/tokens`,
+            {
+              api_key: `ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RVd01ESTNMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuSUJ2MUdjTXZ3S2F4UVFGODBleGZUXzJOZGVNaDVJYkt6OF9HcXpiWEltdXM2Q0FNNkRWRXRsNXJDNEtYRzZmdDN0UkxuWjNCR0pGd2JRdjhQZkI5RXc=`,
+            },
+            { headers: { 'Content-Type': 'application/json' } }
+          )  
+        }),
         switchMap((res: any) => {
           this.paymentToken = res.token;
           return this.client.post(`https://accept.paymob.com/api/ecommerce/orders`,{

@@ -7,6 +7,7 @@ export interface CartItem {
 export interface Cart {
     
   id: number,
+  _id:number,
   cartItems: Product[],
   totalCartPrice: number, // total was updated
   discountedTotal: number,  // discounted total was updated
