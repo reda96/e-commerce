@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunke_commerce=self.webpackChunke_commerce||[]).push([[592],{6012:(m,o,s)=>{s.r(o),s.d(o,{HeighestModule:()=>t});var a=s(6814),n=s(8798),l=s(4946);let t=(()=>{var e;class u{}return(e=u).\u0275fac=function(d){return new(d||e)},e.\u0275mod=l.oAB({type:e}),e.\u0275inj=l.cJS({imports:[a.ez,n.m]}),u})()}}]);

@@ -1,0 +1,147 @@
+.breadcrumb {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+.contact-us-container .breadcrumb {
+    background: #d33b33;
+    margin: 0;
+    display: inline-block;
+    border-radius: 0;
+    li {
+        display: inline-block;
+        color: #010101;
+        font-size: 16px;
+
+        a {
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none!important;
+        }
+    }
+    
+    
+}
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+ul, li, ol {
+    list-style: none;
+    margin: 0;
+}
+a {
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-select-box {
+    float: right;
+    width: 95px;
+
+}
+.custom-select-box{
+    
+    .form-control {
+        padding-top: 0;
+    }
+    .bootstrap-select .btn-light span {
+    padding: 2px;
+    line-height: 15px;
+}}
+.custom-select-box .bootstrap-select .btn-light {
+    padding: 4px;
+    font-size: 14px;
+    background: #d33b33;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+}
+.right-phone-box{
+    float: right;
+    margin-left: 10px;
+}
+.our-link {
+    float: right;
+}
+.custom-select-box .bootstrap-select .btn-light {
+    padding: 4px;
+    font-size: 14px;
+    background: #d33b33;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+}
+.custom-select-box .form-control {
+    background: none;
+    border: none;
+}
+.btn {
+    text-decoration: none!important;
+    outline: none!important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.our-link ul {
+line-height: 30px;
+}
+
+.our-link ul li {
+    display: inline-block;
+    border-right: 1px solid #fff;
+    padding: 0 10px;
+    line-height: 14px;
+}
+.our-link a ,.right-phone-box a{
+    text-decoration: none;
+     color: #fff;
+}
+.our-link a:hover, .right-phone-box a:hover {
+   color: #d33b33;
+}
+
+
+.navbar-nav {
+    flex-direction: row;
+
+}
+
+.ml-auto, .mx-auto {
+    margin-left: auto!important;
+}
+
+
+.nav-link{
+    position: relative;
+    font-weight: 700;
+    font-size: 16px;
+    color: #010101;
+    padding: 30px;
+    padding-left: 10px;
+}
+.row {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+
+}
+
+ .btn:focus {
+    box-shadow: none;
+ }
+ .form-control:focus {
+
+    border-color:inherit;
+    outline: 0;
+    box-shadow: none;
+}
