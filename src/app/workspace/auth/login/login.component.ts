@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
           },
         });
     else {
-      console.log(this.myForm);
+
       this.myForm.reset();
       this.myForm.markAllAsTouched();
     }

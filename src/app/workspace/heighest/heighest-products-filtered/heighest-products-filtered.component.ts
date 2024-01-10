@@ -20,14 +20,18 @@ export class HeighestProductsFilteredComponent implements OnInit, OnDestroy {
   constructor(private productsService:ProductsService){}
 
   ngOnInit(): void {
-   this.subscription= this.productsService.listProducts(`/products?sort=${this.sortBy}&sortType=${this.sortType}&limit=${4}`).pipe(
-      tap(res=> {
-      
+
+    setTimeout(() => {
+      this.subscription= this.productsService.listProducts(`/products?sort=${this.sortBy}&sortType=${this.sortType}&limit=${4}`).pipe(
+        tap(res=> {
         
-        this.products=res;
-        // this.productsSubject.next(res);
-      })
-    ).subscribe()
+          
+          this.products=res;
+          // this.productsSubject.next(res);
+        })
+      ).subscribe()
+    });
+  
 
   }
 

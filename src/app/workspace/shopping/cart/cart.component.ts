@@ -97,14 +97,14 @@ export class CartComponent implements OnInit, OnDestroy {
   updateCartItemQuantity(event:InputNumberInputEvent, product:any){
     
     let quantity = +event.value;
-    console.log(product);
+  
     
     this.cartService.updateCartItemQuantity(product._id,quantity).subscribe()
 
   }
 
   goToPaymentToken(cart:Cart){
-    console.log(cart);
+  
     
     this.cartService.getPaymobToken(cart).subscribe(
     );

@@ -104,14 +104,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    this.productsService.listAllCategories();
+    // this.productsService.listAllCategories();
     let state: any = this._location.getState();
     
     this.sortBy = state?.sortBy
       ? this.sortByOptions.find((s) => s.sortBy == state.sortBy&&s.sortType == state.sortType)
       : undefined;
 
-      this.listAllProducts();
+      // this.listAllProducts();
     if (state.filter) {
       this.filter = state.filter;
 
@@ -131,7 +131,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       // this.productsService.listByCategory(state.category);
       this.currentCategory = state.category;
     }
-    this.listAllProducts();
+    setTimeout(() => {
+      this.listAllProducts();
+    });
     // this.productsService.listAllProducts(this.sortBy?.sortBy, 50,this.sortBy?.sortType,undefined,this.currentCategory,this.filter);
   }
 
