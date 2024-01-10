@@ -1,22 +1,40 @@
-<div class="product"  >
+<div class="product">
   <div class="image-wrapper">
-   
-    <img loading="lazy" [src]="item.imageCover" (click)="goToDetails(item.id)"  alt="" />
-  
- 
+    <img
+      loading="lazy"
+      [src]="item.imageCover"
+      (click)="goToDetails(item.id)"
+      alt=""
+    />
   </div>
   <div style="position: relative">
-    <i class="pi pi-heart-fill" *ngIf="user?.wishlist?.includes(item.id); else:empty "  (click)="removeFromFavorites(item)" ></i>
-   
-    <ng-template #empty>
-    <i class="pi pi-heart" (click)="addToFavorites(item)" ></i>
+    <i
+      class="pi pi-heart-fill"
+      *ngIf="user?.wishlist?.includes(item.id); else empty"
+      (click)="removeFromFavorites(item)"
+    ></i>
 
+    <ng-template #empty>
+      <i class="pi pi-heart" (click)="addToFavorites(item)"></i>
     </ng-template>
 
-    <button  (click)="addToCart(item)" class="add-cart">+ Add To Cart</button>
-    <div (click)="addToCart(item)" class="name"> {{item.title }} </div >
-      <p *ngIf="!item?.priceAfterDiscount;else discount" >{{item.price}} EGP</p>
-      <ng-template #discount> <h6 class="discount" >{{item.priceAfterDiscount}} EGP  <span *ngIf="(item.price&&item.priceAfterDiscount)" class="percentage">-{{((item.price-item.priceAfterDiscount)/item.price)*100 | number:'1.1-2' }} %</span></h6></ng-template>
-      
+    <button (click)="addToCart(item)" class="add-cart">+ Add To Cart</button>
+    <div (click)="addToCart(item)" class="name">{{ item.title }}</div>
+    <p  *ngIf="!item?.priceAfterDiscount; else discount">{{ item.price }} EGP</p>
+    
+    <p-rating [iconOnStyle]="{'color': 'black'}" [readonly]="true" [cancel]="false" [ngModel]="item.ratingsAverage"></p-rating>
+    <ng-template #discount>
+      <h6 class="discount">
+        {{ item.priceAfterDiscount }} EGP
+        <span *ngIf="item.price && item.priceAfterDiscount" class="percentage"
+          >-{{
+            ((item.price - item.priceAfterDiscount) / item.price) * 100
+              | number : "1.1-2"
+          }}
+          %</span
+        >
+      </h6><br>
+      </ng-template
+    >
   </div>
 </div>

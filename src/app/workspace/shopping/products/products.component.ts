@@ -14,51 +14,56 @@ import { ProductsService } from 'src/app/core/services/products.service';
 export class ProductsComponent implements OnInit, OnDestroy {
   productsObs: Observable<Product[]> = this.productsService.listProducts$;
   listCategories: Observable<any[]> = this.productsService.listCategories$;
-  products!:Product[];
-  filter!:any;
-  sortBy!:any;
-  showFilters=true;
+  products!: Product[];
+  filter!: any;
+  sortBy!: any;
+  showFilters = true;
   sortByOptions = [
     { name: 'Top Rated', sortBy: 'ratingsAverage', sortType: -1 },
-    { name: 'Sold Items', sortBy: 'sold', sortType: -1 },
+    { name: 'Best Seller', sortBy: 'sold', sortType: -1 },
     { name: 'Price Descending', sortBy: 'price', sortType: -1 },
     { name: 'Price Ascending', sortBy: 'price', sortType: 1 },
   ];
 
   subscription!: Subscription;
   // sortType = -1;
-  categories!:any[];
+  categories!: any[];
   items!: MenuItem[];
 
-  currentCategory:any = 'all';
+  currentCategory: any = 'all';
   constructor(
     private productsService: ProductsService,
     private _location: LocationStrategy
-  ) 
-  {
-    this.listCategories?.subscribe(res=>{this.categories=res;
-    
+  ) {
+    this.listCategories?.subscribe((res) => {
+      this.categories = res;
+
       this.items = [
         {
-            expanded:true,
-            label: 'Category',
-            // icon: 'pi pi-fw pi-file',
-            items:this.categories?.map(c=>{ return {label:c.name, command:()=> this.listbyCategory(c) } as MenuItem})
-       
+          expanded: true,
+          label: 'Category',
+          // icon: 'pi pi-fw pi-file',
+          items: this.categories?.map((c) => {
+            return {
+              label: c.name,
+              command: () => this.listbyCategory(c),
+            } as MenuItem;
+          }),
         },
         {
-          expanded:true,
+          expanded: true,
           label: 'other filters',
           items: [
-
             {
-                label: 'discount',
-                command:()=> { this.filter= {'priceAfterDiscount' :{$exists : true}};  this.listAllProducts()}
-            }
-        ],
-       
+              label: 'discount',
+              command: () => {
+                this.filter = { priceAfterDiscount: { $exists: true } };
+                this.listAllProducts();
+              },
+            },
+          ],
         },
-  
+
         // {
         //     label: 'Users',
         //     icon: 'pi pi-fw pi-user',
@@ -93,21 +98,23 @@ export class ProductsComponent implements OnInit, OnDestroy {
         //         }
         //     ]
         // },
-    
-    ];
-    })
-
-      
-    
+      ];
+    });
   }
 
   ngOnInit(): void {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.productsService.listAllCategories();
     let state: any = this._location.getState();
-    // console.log(state);
+    
+    this.sortBy = state?.sortBy
+      ? this.sortByOptions.find((s) => s.sortBy == state.sortBy&&s.sortType == state.sortType)
+      : undefined;
+
+      this.listAllProducts();
     if (state.filter) {
       this.filter = state.filter;
+
       // this.subscription = this.productsService
       //   .listProducts(`/products`, undefined, state.filter)
       //   .pipe(
@@ -119,34 +126,39 @@ export class ProductsComponent implements OnInit, OnDestroy {
       //     })
       //   )
       //   .subscribe();
-    } 
-     if (state?.category) {
+    }
+    if (state?.category) {
       // this.productsService.listByCategory(state.category);
       this.currentCategory = state.category;
-      
-    }  
+    }
     this.listAllProducts();
     // this.productsService.listAllProducts(this.sortBy?.sortBy, 50,this.sortBy?.sortType,undefined,this.currentCategory,this.filter);
   }
 
   listAllProducts() {
-    let category = this.currentCategory=='all'?undefined:this.currentCategory;
-    this.productsService.listAllProducts(this.sortBy?.sortBy, 50,this.sortBy?.sortType,undefined,category?._id,this.filter);
+    let category =
+      this.currentCategory == 'all' ? undefined : this.currentCategory;
+    this.productsService.listAllProducts(
+      this.sortBy?.sortBy,
+      50,
+      this.sortBy?.sortType,
+      undefined,
+      category?._id,
+      this.filter
+    );
     // this.currentCategory = 'all';
   }
   listbyCategory(category: any) {
     this.currentCategory = category;
-    
+
     // this.productsService.listByCategory(categoryId);
-    this.listAllProducts()
+    this.listAllProducts();
   }
   changeSortBy(event: DropdownChangeEvent) {
     // console.log(event.value);
-    this.productsService.listAllProducts(
-      event.value.sortBy,
-      50,
-      event.value.sortType
-    );
+    this.sortBy = event.value;
+
+    this.listAllProducts();
   }
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();

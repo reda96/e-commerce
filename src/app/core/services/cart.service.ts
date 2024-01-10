@@ -145,7 +145,7 @@ export class CartService extends BaseService {
         }),
         map( (res:any)=>{
           
-          console.log(res);
+          // console.log(res);
           window.location.href=`https://accept.paymobsolutions.com/api/acceptance/iframes/812526?payment_token=${res.token}`
           // this.router.navigate([`https://accept.paymobsolutions.com/api/acceptance/iframes/812526?payment_token=${res.token}`])
           
