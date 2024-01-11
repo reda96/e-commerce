@@ -5,8 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "prebuild":"cd ./e-commerce-backend/udemy-build-ecommerce-api-using-nodejs-master/ && npm run build",
-    "build-prod":" ng build --configuration production --base-href https://reda96.github.io/e-commerce/",
+    "prebuild":"cd ./e-commerce-backend/udemy-build-ecommerce-api-using-nodejs-master/ && npm install",
+
+    "start-server": "cd ./e-commerce-backend/udemy-build-ecommerce-api-using-nodejs-master && NPM RUN START",
+   
+    "build-prod":" ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
