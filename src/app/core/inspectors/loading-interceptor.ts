@@ -32,7 +32,8 @@ export class LoadingInterceptor implements HttpInterceptor {
 
         let handleObs: Observable<HttpEvent<any>>;
         if(!req.url.includes("https://accept.paymob.com")&&!req.url.includes("https://accept.paymobsolutions.com"))
-       this.clonedRequest = req.clone({ headers: req.headers.append('authorization', 'Bearer '+ sessionStorage.getItem('token'))});
+       this.clonedRequest = req.clone({ headers: req.headers.append('authorization', 'Bearer '+ sessionStorage.getItem('token'))
+    .append('Accept-Encoding','gzip, compress, br')});
     else this.clonedRequest = req;
         handleObs = next.handle(this.clonedRequest).pipe(catchError((errorResponse, caught) => {
             //console.log('Caught error ', errorResponse);

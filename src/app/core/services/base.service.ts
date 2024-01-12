@@ -12,6 +12,7 @@ export class BaseService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin':'http://localhost:4200',
       'Access-Control-Allow-Methods':'*',
+      'Accept-Encoding': 'gzip, compress, br'
       //'Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With',
     }),
   };
