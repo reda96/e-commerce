@@ -5,6 +5,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { FavoritesComponent } from '../shopping/favorites/favorites.component';
 import { ProductsComponent } from '../shopping/products/products.component';
+import { ProductDetailsComponent } from '../shopping/product-details/product-details.component';
 
 
 
@@ -15,7 +16,7 @@ const routes: Routes = [
   // { path: "shop", component: ProductsComponent },
   { path: "whishlist",canActivate:[AuthGuard], component: FavoritesComponent },
   { path: "shop", component: ProductsComponent },
-
+  { path: "item/:id", component: ProductDetailsComponent },
 
 
 

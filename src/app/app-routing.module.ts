@@ -12,14 +12,14 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'shop',
+    path: 'cart',
     loadChildren: () =>
       import('./workspace/shopping/core.module').then(
         (m) => m.CoreModule
       ),
   },
   {
-    path: '',
+    path: 'login',
     canActivate:[LoggedInAuthGuard],
 
     loadChildren: () =>
