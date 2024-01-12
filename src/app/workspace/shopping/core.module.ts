@@ -1,50 +1,50 @@
 import { NgModule } from '@angular/core';
-import { OwlCarouselComponent } from '../components/owl-carousel/owl-carousel.component';
-import { CardComponent } from '../components/card/card.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { CollectionsComponent } from './collections/collections.component';
-import { ProductsGridComponent } from '../components/products-grid/products-grid.component';
-import { GridCardComponent } from '../components/grid-card/grid-card.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
 import { SharedModule } from '../shared/shared.module';
 import { CoreRoutingModule } from './core-routing.module';
 import { ArrayInlcudesPipe } from 'src/app/core/pipes/array-inlcudes.pipe';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { HeighestModule } from '../heighest/heighest.module';
+import { CommonModule } from '@angular/common';
+import { CarouselModule } from 'primeng/carousel';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FormsModule } from '@angular/forms';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { RatingModule } from 'primeng/rating';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DropdownModule } from 'primeng/dropdown';
+
 
 
 
 @NgModule({
   declarations: [
-    OwlCarouselComponent,
-    CardComponent,
-    LandingPageComponent,
-    CollectionsComponent,
-
-    ProductsComponent,
-    ProductDetailsComponent,
+   
+  ProductDetailsComponent,
     CartComponent,
     ArrayInlcudesPipe,
-    FavoritesComponent
+    
   ],
   imports: [
-    HeighestModule,
-    SharedModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    CommonModule,
+    CarouselModule,
+    CheckboxModule,
+     FormsModule,
+     RatingModule,
+     ProgressSpinnerModule,
+     SharedModule,
+    InputNumberModule,
+
+    
   ],
   exports: [
  
-    OwlCarouselComponent,
-    CardComponent,
-    LandingPageComponent,
-    CollectionsComponent,
-    ProductsGridComponent,
-    GridCardComponent,
-    ProductsComponent,
-    ProductDetailsComponent,
+
+
+ 
     CartComponent,
+    
   ]
 })
 export class CoreModule { }

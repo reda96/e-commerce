@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,53 +9,52 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuModule } from 'primeng/menu';
 import { GridCardComponent } from '../components/grid-card/grid-card.component';
 import { ProductsGridComponent } from '../components/products-grid/products-grid.component';
-import { DropdownModule } from 'primeng/dropdown';
+
 import { DialogModule } from 'primeng/dialog';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { CommonModule } from '@angular/common';
 @NgModule({
-  declarations: [ProductsGridComponent, GridCardComponent],
+  declarations: [GridCardComponent,ProductsGridComponent],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CarouselModule,
+    // CarouselModule,
     ButtonModule,
     TagModule,
     HttpClientModule,
     RatingModule,
     // ProgressSpinnerModule,
-    CheckboxModule,
-    InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
     MenuModule,
-    DropdownModule,
+    
     DialogModule,
-    PanelMenuModule
+    PanelMenuModule,
+    RatingModule,
     // BrowserAnimationsModule
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    CarouselModule,
+    // CarouselModule,
     ButtonModule,
     TagModule,
     // HttpClientModule,
     RatingModule,
     ProgressSpinnerModule,
-    CheckboxModule,
-    InputNumberModule,
     ConfirmPopupModule,
     OverlayPanelModule,
     MenuModule,
-    ProductsGridComponent,
-    GridCardComponent,
-    DropdownModule,
+    
+    GridCardComponent,ProductsGridComponent,
+    
     DialogModule,
-    PanelMenuModule
+    PanelMenuModule,
+    RatingModule,
     // BrowserAnimationsModule
   ],
 })

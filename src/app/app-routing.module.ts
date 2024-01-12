@@ -7,15 +7,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./workspace/shopping/core.module').then(
-        (m) => m.CoreModule
+      import('./workspace/landing/landing.module').then(
+        (m) => m.LandingModule
       ),
   },
   {
-    path: '',
+    path: 'shop',
     loadChildren: () =>
-      import('./workspace/heighest/heighest.module').then(
-        (m) => m.HeighestModule
+      import('./workspace/shopping/core.module').then(
+        (m) => m.CoreModule
       ),
   },
   {

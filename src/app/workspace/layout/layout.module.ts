@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuModule } from 'primeng/menu';
 import { SearchComponent } from '../components/search/search.component';
+import { FormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
   declarations: [HeaderComponent,SearchComponent, FooterComponent, MainLayoutComponent],
@@ -19,8 +22,11 @@ import { SearchComponent } from '../components/search/search.component';
     // BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SharedModule,
+    FormsModule,
     MenuModule,
+    DialogModule,
+    RatingModule,
+    FormsModule,
   ],
   exports: [MainLayoutComponent],
 })
