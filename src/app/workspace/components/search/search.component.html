@@ -1,0 +1,29 @@
+<div class="search">
+  <span (click)="visible = true" class="p-input p-input-icon-right " href="">
+    <input type="text" placeholder="search by product title" (ngModelChange)="searchProducts($event)" pInputText [ngModel]="searchInput" />
+    <i class="pi pi-search" style="font-size: 1rem"></i>
+  </span>
+  <ng-container *ngIf="products " >
+  <p-dialog
+   
+    [blockScroll]="true"
+    maskStyleClass="mask"
+    [showHeader]="false"
+    (onHide)="visible = false"
+    [(visible)]="visible"
+    [style]="{ width: '15rem' }"
+    [closeOnEscape]="true"
+  >
+  <ng-container *ngIf="!products.length" >
+    <div  >
+        <span class="result" >No Results Found</span>
+        
+      </div></ng-container>
+  <div (click)="visible=false"  *ngFor="let item of products">
+  <span [routerLink]="['/item', item.id]" class="result" >{{item.title}}</span>
+  
+</div>
+  </p-dialog>
+</ng-container>
+</div>
+

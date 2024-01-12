@@ -1,0 +1,5 @@
+
+<div class="row products justify-content-center"  *ngIf=" products"  >
+    <h5 routerLink="shop" [state]="{sortBy ,sortType}" >{{title}}</h5>
+<app-products-grid [products]='products' ></app-products-grid>
+</div>

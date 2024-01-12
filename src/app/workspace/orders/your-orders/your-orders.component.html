@@ -1,0 +1,15 @@
+<div  [style]="{'background-color': '#f4f4f4', 'min-height': '80vh', 'margin-top': '4.2rem', 'padding-top':'1rem' }">
+  <h4 class="px-5">Your Orders</h4>
+  <div class="order px-5" *ngFor="let order of ordersObs | async">
+    <div  class="d-flex justify-content-between">
+        <span>{{ order.createdAt | date }} </span>
+         <span class="px-5" [ngStyle]="{'color': order.isPaid ? 'green':'red'}" >
+        {{order.isPaid ? 'Successfull': 'Failed'}}</span> </div>  
+    <div class="d-flex justify-content-between"  >
+        <span>Order ID: {{ order._id }}</span>
+        <div [routerLink]="['/orders',order._id ]"  [state]="{ order }"  class="btn btn-secondary" >Order details</div>
+    </div>
+
+   
+  </div>
+</div>

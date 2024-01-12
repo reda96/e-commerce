@@ -5,6 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "prebuild":"cd ./e-commerce-backend/udemy-build-ecommerce-api-using-nodejs-master/ && npm install",
+
+    "start-server": "cd ./e-commerce-backend/udemy-build-ecommerce-api-using-nodejs-master && NPM RUN START",
+   
+    "build-prod":" ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -24,6 +29,8 @@
     "primeng": "^16.3.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

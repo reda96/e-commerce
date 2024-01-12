@@ -1,95 +1,55 @@
-<header>
-  <!-- <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-3">
-        <div class="header__logo">
-          <a href="./index.html"
-            ><img src="../../../../assets/images/logo.png" alt=""
-          /></a>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6">
-        <nav class="navbar navbar-expand-lg ">
-          <div class="container-fluid">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div
-              class="collapse navbar-collapse justify-content-center"
-              id="navbarNav"
-            >
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-around">
-                <li class="nav-item px-2">
-                  <a class="nav-link active" aria-current="page" href="#"
-                    >Home</a
-                  >
-                </li>
-                <li class="nav-item px-2">
-                  <a class="nav-link" href="#">Shop</a>
-                </li>
-                <li class="nav-item px-2">
-                  <a class="nav-link" href="#">Pages</a>
-                </li>
-                <li class="nav-item px-2">
-                  <a class="nav-link" href="#">Contacts</a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                  </li> 
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-      <div class="col-lg-3 col-md-3">
-        <div class="px-2 py-2">
-          <a class="px-2 " href=""> <i class="pi pi-search" style="font-size: 1rem"></i> </a>
-          <a class="px-2 " href=""> <i class="pi pi-heart" style="font-size: 1rem"></i> </a>
-          <a class="px-2 " href="">
-            <i class="pi pi-shopping-cart" style="font-size: 1rem"></i
-          ></a>
-          <span class="px-2">$0.00</span>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
-
+<header
+  [ngStyle]="{ position: currentRoute == '/login' ? 'absolute' : 'fixed' }"
+>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink=""> <div class="header__logo">
-      <img width="130px" height="50px"  src="/assets/images/logo.png" alt=""
-        />
-      </div></a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="container-fluid justify-content-between">
+      <a class="navbar-brand" routerLink="">
+        <div class="header__logo">
+          <img width="150px" src="/assets/images/logo.png" alt="" /></div
+      ></a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
+    
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-around">
           <li class="nav-item px-2">
-            <a class="nav-link active" aria-current="page" href="#"
+            <a
+              class="nav-link"
+              [ngClass]="{ active: currentRoute == '/' }"
+              aria-current="page"
+              [routerLink]="['/']"
               >Home</a
             >
           </li>
           <li class="nav-item px-2">
-            <a class="nav-link" href="#">Shop</a>
+            <a
+              class="nav-link"
+              [ngClass]="{ active: currentRoute == '/shop' }"
+              [routerLink]="['/shop']"
+              >Shop</a
+            >
           </li>
           <li class="nav-item px-2">
-            <a class="nav-link" href="#">Pages</a>
+            <a
+            class="nav-link"
+            *ngIf="loggedInUserObs | async"
+              [routerLink]="['/orders']"
+              [ngClass]="{ active: currentRoute == '/orders' }"
+             
+              >Orders</a
+            >
           </li>
-          <li class="nav-item px-2">
-            <a class="nav-link" href="#">Contacts</a>
-          </li>
+
           <!-- <li class="nav-item">
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li> -->
@@ -97,27 +57,43 @@
         <form class="d-flex">
           <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button> -->
-            
-            <div class="px-2 py-2" *ngIf="loggedInUserObs | async; else in">
-              
-            <ng-container *ngIf="cartObs | async as cart" >
-              <span class="px-2 " href=""> <i class="pi pi-search" style="font-size: 1rem"></i> </span>
-              <span routerLink="whishlist" class="px-2 " href=""> <i class="pi pi-heart" style="font-size: 1rem"></i> </span> 
-              <span class="px-2 "  routerLink="cart"  >
-                <i class="pi pi-shopping-cart" style="font-size: 1rem"><sup class="sup"  >{{ cart.cartItems.length }}</sup></i
-              ></span>
-              <span class="px-2">{{cart.totalCartPrice}} EGP</span>
-            </ng-container>
-            <i (click)="logout()" class="pi pi-sign-out" style="font-size: 1rem"></i>
 
-          
+          <div
+            class="px-2 py-2 d-flex"
+            *ngIf="loggedInUserObs | async; else in"
+          >
+            <app-search></app-search>
+            <ng-container *ngIf="cartObs | async as cart">
+              <!-- </span> -->
+
+              <span routerLink="whishlist" class="px-2" href="">
+                <i class="pi pi-heart" style="font-size: 1rem"></i>
+              </span>
+              <span class="px-2" routerLink="cart">
+                <i class="pi pi-shopping-cart" style="font-size: 1rem"
+                  ><sup class="sup">{{ cart.cartItems.length }}</sup></i
+                ></span
+              >
+              <span class="px-2">{{ cart.totalCartPrice }} EGP</span>
+            </ng-container>
+            <i
+              (click)="logout()"
+              class="py-1 pi pi-sign-out"
+              style="font-size: 1rem"
+            ></i>
           </div>
           <ng-template #in>
-            <div  class="px-2 " href=""> <i (mouseenter)="op.toggle($event)" class="pi pi-user" style="font-size: 1rem"></i> </div>
-            <p-menu #op [model]="items" [popup]="true"></p-menu> 
-            <!-- <p-overlayPanel #op>
-                <img src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" alt="product" />
-            </p-overlayPanel> -->
+            <div class="px-2">
+              <i
+                (mouseenter)="op.toggle($event)"
+                class="pi pi-user"
+                style="font-size: 1rem"
+              ></i>
+            </div>
+            <p-menu #op [model]="items" [popup]="true"></p-menu>
+            <ng-template pTemplate="item" let-item>
+              <span> {{ item.label }}</span>
+            </ng-template>
           </ng-template>
         </form>
       </div>

@@ -12,7 +12,9 @@ export interface Product {
   updatedAt: string;
   thumbnail:string;
   category: string;
-  quantity?:number
+  quantity?:number;
+  ratingsAverage:number;
+  priceAfterDiscount?:number;
 }
 // export const productInstance:Product = {
 //     "id": 26,

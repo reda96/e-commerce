@@ -22,6 +22,7 @@ h4 {
     max-height: 80vh;
     box-shadow: 1px 1px 3px  #333;
     min-width: 300px;
+    transition: ease-in-out 0.2s;
 
 }
 .login-form {
@@ -40,9 +41,13 @@ form {
     color: #dd0000;
     display: block;
   }
-input.ng-invalid.ng-touched {
+input{
+    &.ng-valid.ng-touched{
+        border-color:#4BB543 ;
+    }
+    &.ng-invalid.ng-touched {
     border-color:#dd0000 ;
-}
+}}
 .signup-form>div {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -51,7 +56,9 @@ input.ng-invalid.ng-touched {
 
 
 .signup-form {
-
+  label {
+    margin-bottom: 0.2rem;
+  }
     h4 {
         color: #aaa;
     }
@@ -63,7 +70,7 @@ input.ng-invalid.ng-touched {
         }
     }
     color: #aaa;
-   height: 70vh;
+   height: 80vh;
     position:relative;
     top: 13vh;
     background-color: #222;
@@ -78,4 +85,9 @@ input.ng-invalid.ng-touched {
     top: -50vh;
     background-color: #333;
     transition: ease 1s;
+}
+
+button {
+    text-align: center;
+    display: block;
 }

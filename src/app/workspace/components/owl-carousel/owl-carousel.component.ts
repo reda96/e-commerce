@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
   selector: 'app-owl-carousel',
@@ -7,36 +8,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwlCarouselComponent implements OnInit {
     products!: any[];
-
+    categories!:any[];
     responsiveOptions: any[] | undefined;
-
-    constructor() {}
+    categoriesObs = this.productsService.listCategories$;
+    constructor(private productsService:ProductsService) {}
 
     ngOnInit() {
-       this.products=[
-        {
-          name: 'female collections',
-          description: 'female winter collection with offers',
-          image: '/assets/images/female-model.png',
-          category:'',
-          height: '500'
-    
-        },
-      {
-        name: 'male winter collections',
-        description: 'Buy 2 get 3rd free',
-        image: '/assets/images/male-model.png',
-        category:'',
-        height: '470'
-    
-    },{
-        name: 'kids winter collections',
-        description: 'Buy 2 get 3rd free',
-        image: '/assets/images/kid-model.png',
-        height: '520',
-        category:''
-    }
-       ]
+        this.productsService.listAllCategories();
+        this.categoriesObs?.subscribe(res=>{
+            
+            this.categories=res;
+            this.products=[
+                {
+                  name: 'female collections',
+                  description: 'female winter collection with offers',
+                  image: '/assets/images/female-model.png',
+                  category:this.categories?.find((x:any)=> x.name=="women's collection"),
+                  height: '500',
+                  
+            
+                },
+              {
+                name: 'male winter collections',
+                description: 'Buy 2 get 3rd free',
+                image: '/assets/images/male-model.png',
+                category:this.categories?.find((x:any)=> x.name=="men's collection"),
+                height: '470'
+            
+            },{
+                name: 'kids winter collections',
+                description: 'Buy 2 get 3rd free',
+                image: '/assets/images/kid-model.png',
+                height: '520',
+                category:this.categories?.find((x:any)=> x.name=="kid's collection"),
+        
+               
+            }
+               ]
+        
+        });
+            // console.log(this.categories?.find((x:any)=> x.name=="women's collection"));
+
+  
 
         this.responsiveOptions = [
             {

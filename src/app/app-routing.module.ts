@@ -13,11 +13,28 @@ const routes: Routes = [
   },
   {
     path: '',
+    loadChildren: () =>
+      import('./workspace/heighest/heighest.module').then(
+        (m) => m.HeighestModule
+      ),
+  },
+  {
+    path: '',
     canActivate:[LoggedInAuthGuard],
 
     loadChildren: () =>
       import('./workspace/auth/auth.module').then(
         (m) => m.AuthModule
+      ),
+  },
+
+  {
+    path: 'orders',
+    canActivate:[AuthGuard],
+
+    loadChildren: () =>
+      import('./workspace/orders/orders.module').then(
+        (m) => m.OrdersModule
       ),
   },
 ];

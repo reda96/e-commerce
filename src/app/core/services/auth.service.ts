@@ -66,5 +66,9 @@ export class AuthService extends BaseService {
       })).subscribe()
        
       }
+
+      destroyUserObs(){
+        this.loggedInUserSub.next(undefined)
+      }
 }
   

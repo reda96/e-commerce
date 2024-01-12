@@ -24,10 +24,14 @@ constructor(private productsService:ProductsService,
   private _location:Location){}
 ngOnInit(): void {
   this.activatedRoute.snapshot.params['id'];
+ 
+ setTimeout(() => {
   this.activatedRoute.params.subscribe((params: Params) => {
     // this.id = params['id'];
     this.productsService.getProductById(params['id'])
   });
+ });
+
   this.productSubscription= this.productObs.subscribe(product=>
     {
       // if(product)

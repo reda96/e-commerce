@@ -11,14 +11,14 @@ import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     ProgressSpinnerModule,
-    LayoutModule
+    LayoutModule, 
+    
     
     
   ],

@@ -1,7 +1,11 @@
 
+
+
 .row {
     --bs-gutter-x: 0;
     --bs-gutter-y: 0;
+    line-height: 1;
+    align-items: center;
 
 }
 .filter__controls{
@@ -19,3 +23,13 @@
     margin-right: 88px;
     cursor: pointer;
 }
+
+i{
+    font-size: 1.5rem;
+}
+
+.bold {
+    margin-right: 8px;
+    font-weight: 700;
+}
+

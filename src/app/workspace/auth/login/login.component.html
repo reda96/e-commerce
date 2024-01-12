@@ -1,5 +1,6 @@
-<div class="bg">
-  <div class="container">
+   
+    <div class="bg" >  
+  <div class="container" [ngStyle]="{ 'max-height':activeForm=='signup'?'90vh':'80vh', }">
     <div (click)="activeForm='login'" style="text-align: center;padding-top: 2rem;" >
       <img src="/assets/images/logo.png" alt="">
     </div>
@@ -80,14 +81,21 @@
         </div>
       </div>
 
-
-    <div class="d-flex justify-content-center mt-5">
+      <ng-container
+      [ngTemplateOutlet]="errorTemplate"
+      [ngTemplateOutletContext]="{
+        formEle:'loginErrorMessage'
+      }"
+    >
+    </ng-container>
+    <div class=" justify-content-center " [ngClass]="loginErrorMessage? 'mt-2' : 'mt-5'">
       <button
         class="btn btn-primary"
         pButton
         type="submit"
       >Login</button>
     </div>
+    
   </form>
 
 
@@ -195,40 +203,50 @@
       </ng-container>
       </div>
     
-
+      <ng-container
+      [ngTemplateOutlet]="errorTemplate"
+      [ngTemplateOutletContext]="{
+        formEle:'signupErrorMessage'
+      }"
+    >
+    </ng-container>
  
 
 
-  <div class="d-flex justify-content-center mt-2">
+  <div class=" justify-content-center mt-2">
     <button
       class="btn btn-primary"
       pButton
       type="submit"
     >Sign up</button>
   </div>
+
 </form>
 
 <ng-template  let-formEle="formEle"   #errorTemplate >
-  <div *ngIf="formEle.invalid && 
-  formEle.errors && 
-  (formEle.dirty || formEle.touched)"  >
+  <div *ngIf="(formEle.invalid && 
+  formEle.errors &&  (formEle.dirty || formEle.touched))|| (loginErrorMessage||signupErrorMessage)"  >
 <small class="text-danger"
-  *ngIf="formEle.hasError('required')">
+  *ngIf=" formEle.touched&&formEle.hasError?.('required')">
   This field is required.
 </small>
 <small class="text-danger"
-  *ngIf="formEle.hasError('minlength')">
+  *ngIf=" formEle.touched&&formEle.hasError?.('minlength')">
   The minimum length for this field is {{formEle.errors.minlength.requiredLength}} characters.
 </small>
 <small class="text-danger"
-  *ngIf="formEle.hasError('email')">
+  *ngIf=" formEle.touched&&formEle.hasError?.('email')">
  Plaese type email in correct format.
 </small>
 <small class="text-danger"
-  *ngIf="formEle.hasError('PasswordNoMatch')">
+  *ngIf=" formEle.touched&&formEle.hasError?.('PasswordNoMatch')">
  passwords do not match</small>
-
-
+ <small class="text-danger"
+ *ngIf="formEle == 'signupErrorMessage'">
+{{signupErrorMessage}}</small>
+<small class="text-danger"
+*ngIf="formEle == 'loginErrorMessage'">
+{{loginErrorMessage}}</small>
 </div>
 </ng-template>
 </div>

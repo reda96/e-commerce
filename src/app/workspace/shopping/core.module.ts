@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ContactUsComponent } from '../components/contact-us/contact-us.component';
 import { OwlCarouselComponent } from '../components/owl-carousel/owl-carousel.component';
 import { CardComponent } from '../components/card/card.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -14,19 +12,17 @@ import { SharedModule } from '../shared/shared.module';
 import { CoreRoutingModule } from './core-routing.module';
 import { ArrayInlcudesPipe } from 'src/app/core/pipes/array-inlcudes.pipe';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { HeighestModule } from '../heighest/heighest.module';
 
 
 
 @NgModule({
   declarations: [
-
-    ContactUsComponent,
     OwlCarouselComponent,
     CardComponent,
     LandingPageComponent,
     CollectionsComponent,
-    ProductsGridComponent,
-    GridCardComponent,
+
     ProductsComponent,
     ProductDetailsComponent,
     CartComponent,
@@ -34,13 +30,12 @@ import { FavoritesComponent } from './favorites/favorites.component';
     FavoritesComponent
   ],
   imports: [
-    
+    HeighestModule,
     SharedModule,
     CoreRoutingModule
   ],
   exports: [
  
-    ContactUsComponent,
     OwlCarouselComponent,
     CardComponent,
     LandingPageComponent,
