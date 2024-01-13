@@ -39,7 +39,7 @@ export class OwlCarouselComponent implements OnInit {
                 name: 'kids winter collections',
                 description: 'Buy 2 get 3rd free',
                 image: '/assets/images/kid-model.png',
-                height: '520',
+                height: '550',
                 category:this.categories?.find((x:any)=> x.name=="kid's collection"),
         
                
@@ -57,6 +57,16 @@ export class OwlCarouselComponent implements OnInit {
                 numVisible: 1,
                 numScroll: 1
             },
+            {
+                breakpoint: '991px',
+                numVisible: 1,
+                numScroll: 1
+            },
+            {
+                breakpoint: '767px',
+                numVisible: 1,
+                numScroll: 1
+            }
       
         ];
     }

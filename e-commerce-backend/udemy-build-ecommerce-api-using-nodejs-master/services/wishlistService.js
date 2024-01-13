@@ -6,7 +6,6 @@ const User = require('../models/userModel');
 // @route   POST /api/v1/wishlist
 // @access  Protected/User
 exports.addProductToWishlist = asyncHandler(async (req, res, next) => {
-  console.log(req.body);
   // $addToSet => add productId to wishlist array if productId not exist
   const user = await User.findByIdAndUpdate(
     req.user._id,

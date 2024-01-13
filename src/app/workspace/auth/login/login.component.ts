@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -23,15 +24,23 @@ export class LoginComponent implements OnInit {
   signupForm!: FormGroup;
   loginErrorMessage!:string;
   signupErrorMessage!:string;
-
+  navigationMessage!:string;
   constructor(
     private fb: FormBuilder,
     private authservice: AuthService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private location:Location
   ) {}
   ngOnInit(): void {
     window.scroll(100, 100);
+    
+    let state:any =this.location.getState();
+   
+    
+    if(state.message){
+      this.navigationMessage = state.message;
+    }
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],

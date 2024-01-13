@@ -11,6 +11,7 @@ import { ProductsService } from 'src/app/core/services/products.service';
 export class CardComponent implements OnInit {
   @Input() label!:string;
   @Input() filter!:object;
+  @Input() imageSrc!:string
   // subscription!:Subscription;
 
   constructor(){}

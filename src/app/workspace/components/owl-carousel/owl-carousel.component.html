@@ -1,5 +1,9 @@
 <div class="card">
-  <p-carousel [value]="products" [numVisible]="1" [circular]="true" [autoplayInterval]="2000" contentClass="content">
+  <!-- [circular]="true"
+  [autoplayInterval]="2000" -->
+  <p-carousel [value]="products" [numVisible]="1" [responsiveOptions]="responsiveOptions" 
+
+    contentClass="content">
     <ng-template let-product pTemplate="item">
       <div class="border-1 m-2 text-center item">
         <div class="details">
@@ -17,7 +21,7 @@
                     </div> -->
         </div>
         <div>
-          <img [src]="product.image" [alt]="product.name" [height]="product.height" />
+          <img [src]="product.image" [alt]="product.name" width="350px" [height]="product.height" />
         </div>
       </div>
     </ng-template>

@@ -15,7 +15,6 @@ const User = require('../models/userModel');
 // @access  Public
 exports.signup = asyncHandler(async (req, res, next) => {
   // 1- Create user
-  console.log(req.body);
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,

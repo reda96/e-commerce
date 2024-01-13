@@ -5,6 +5,13 @@
       <img src="/assets/images/logo.png" alt="">
     </div>
 <form (click)="activeForm='login'" style="padding: 2rem;" class="login-form"  [formGroup]="myForm" (ngSubmit)="login()" >
+  <ng-container
+  [ngTemplateOutlet]="errorTemplate"
+  [ngTemplateOutletContext]="{
+    formEle:'navigationErrorMessage'
+  }"
+>
+</ng-container>
       <h4 (click)="activeForm='login'" style="text-align: center;" >Log in</h4>
       
         <div class="form-input field">
@@ -225,7 +232,7 @@
 
 <ng-template  let-formEle="formEle"   #errorTemplate >
   <div *ngIf="(formEle.invalid && 
-  formEle.errors &&  (formEle.dirty || formEle.touched))|| (loginErrorMessage||signupErrorMessage)"  >
+  formEle.errors &&  (formEle.dirty || formEle.touched))|| (loginErrorMessage||signupErrorMessage||navigationMessage)"  >
 <small class="text-danger"
   *ngIf=" formEle.touched&&formEle.hasError?.('required')">
   This field is required.
@@ -247,6 +254,9 @@
 <small class="text-danger"
 *ngIf="formEle == 'loginErrorMessage'">
 {{loginErrorMessage}}</small>
+<small class=" text-danger"
+*ngIf="formEle == 'navigationErrorMessage'">
+{{navigationMessage}}</small>
 </div>
 </ng-template>
 </div>

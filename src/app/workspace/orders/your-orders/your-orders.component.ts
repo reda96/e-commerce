@@ -11,6 +11,7 @@ export class YourOrdersComponent implements OnInit {
   constructor(private ordersService:OrdersService){}
 
   ngOnInit(): void {
+    window.scroll(0,0)
     this.ordersService.getOrdersOfSpecificUser();
   }
 }

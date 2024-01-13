@@ -1,4 +1,4 @@
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, timeout } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import {
@@ -10,7 +10,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { Observable, of, throwError as observableThrowError } from 'rxjs';
+import { Observable, of, throwError as observableThrowError, throwError } from 'rxjs';
 import { SpinnerService } from '../services/loading.service';
 
 // import { ApiRequest } from '../models/api-request';
@@ -29,7 +29,8 @@ export class LoadingInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     {
       // console.log(req);
-
+     if(   !( req.method == 'POST' &&
+     req.url.includes('api/v1/cart')))
       this.doPrework(req);
 
       let handleObs: Observable<HttpEvent<any>>;
@@ -46,17 +47,21 @@ export class LoadingInterceptor implements HttpInterceptor {
       else this.clonedRequest = req;
 
       handleObs = next.handle(this.clonedRequest).pipe(
+        // timeout({
+        //   each: 1000,
+        //   with: () => throwError(() => new CustomTimeoutError())
+        // }),
         catchError((errorResponse, caught) => {
-          // console.log('Caught error ', errorResponse);
-          if (
+          //  console.log('Caught error ', errorResponse?.error?.message);
+           if(["Invalid token, please login again.."].includes(errorResponse?.error?.message)||(
             ['JsonWebTokenError', 'TokenExpiredError'].includes(
               errorResponse?.error?.error?.name
-            )
+            ))
           ) {
-            this.spinnerService.hide();
-            this.router.navigateByUrl('/login');
+            
+            this.router.navigateByUrl('/login',{state: {message: 'You have to log in to complete this request'}});
           }
-
+          this.spinnerService.hide();
           return observableThrowError(errorResponse);
         })
       );
@@ -66,8 +71,8 @@ export class LoadingInterceptor implements HttpInterceptor {
             // console.log("post");
             if (
               !(
-                req.method == 'PUT' &&
-                req.url.includes('https://dummyjson.com/carts')
+                req.method == 'POST' &&
+                req.url.includes('api/v1/cart')
               )
             )
               this.doPostwork(response);
@@ -96,5 +101,12 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   private isExemptedUrl(url: string): boolean {
     return this.loadingExemptedUrls.some((exempted) => url.includes(exempted));
+  }
+}
+
+class CustomTimeoutError extends Error {
+  constructor() {
+    super('Check your connection');
+    this.name = 'CustomTimeoutError';
   }
 }

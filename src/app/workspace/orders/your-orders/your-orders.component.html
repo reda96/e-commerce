@@ -1,6 +1,6 @@
 <div  [style]="{'background-color': '#f4f4f4', 'min-height': '80vh', 'margin-top': '4.2rem', 'padding-top':'1rem' }">
   <h4 class="px-5">Your Orders</h4>
-  <div class="order px-5" *ngFor="let order of ordersObs | async">
+  <div class="order px-5 mt-3" *ngFor="let order of ordersObs | async">
     <div  class="d-flex justify-content-between">
         <span>{{ order.createdAt | date }} </span>
          <span class="px-5" [ngStyle]="{'color': order.isPaid ? 'green':'red'}" >

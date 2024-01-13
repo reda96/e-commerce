@@ -20,10 +20,8 @@ const calcTotalCartPrice = (cart) => {
 // @access  Private/User
 exports.addProductToCart = asyncHandler(async (req, res, next) => {
   const { productId, color,title } = req.body;
-  console.log(productId);
   const product = await Product.findById(productId);
    
-  console.log(product);
   // 1) Get Cart for logged user
   let cart = await Cart.findOne({ user: req.user._id });
 
