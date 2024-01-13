@@ -63,12 +63,13 @@
             *ngIf="loggedInUserObs | async; else in"
           >
             <app-search></app-search>
+            <span routerLink="whishlist" class="px-2" href="">
+              <i class="pi pi-heart" style="font-size: 1rem"></i>
+            </span>
             <ng-container *ngIf="cartObs | async as cart">
               <!-- </span> -->
 
-              <span routerLink="whishlist" class="px-2" href="">
-                <i class="pi pi-heart" style="font-size: 1rem"></i>
-              </span>
+             
               <span class="px-2" routerLink="cart">
                 <i class="pi pi-shopping-cart" style="font-size: 1rem"
                   ><sup class="sup">{{ cart.cartItems.length }}</sup></i

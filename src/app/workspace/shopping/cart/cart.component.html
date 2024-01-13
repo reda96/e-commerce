@@ -26,7 +26,7 @@
           <div class="  mx-3" >
             <img loading="lazy" [src]="product.images[0]" [alt]="" class="" />
         </div>
-        <h6 class="col-5" >{{ product.title }}</h6>
+        <h6 [style]="{ 'cursor':'pointer' }" [routerLink]="['/item/',product.id]" class="col-5" >{{ product.title }}</h6>
           <div class=" ">
            
             <div class="" >
