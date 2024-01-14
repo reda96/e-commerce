@@ -83,9 +83,10 @@ export class LoadingInterceptor implements HttpInterceptor {
   }
 
   private doPrework(req: HttpRequest<any>) {
-    this.counter++;
+    // this.counter++;
     
-    if (this.counter == 1) {
+    // if (this.counter == 1)
+     {
       this.spinnerService.show();
     }
 
@@ -93,8 +94,9 @@ export class LoadingInterceptor implements HttpInterceptor {
   }
 
   private doPostwork(resp: HttpResponse<any>) {
-    this.counter--;
-    if (this.counter == 0) {
+    // this.counter--;
+    // if (this.counter == 0)
+     {
       this.spinnerService.hide();
     }
   }
