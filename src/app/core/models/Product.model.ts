@@ -11,7 +11,7 @@ export interface Product {
   creationAt: string;
   updatedAt: string;
   thumbnail:string;
-  category: string;
+  category: any;
   quantity?:number;
   ratingsAverage:number;
   priceAfterDiscount?:number;

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { Location } from '@angular/common';
 import { ADDING_TO_CART_STATUS } from 'src/app/core/constants/enums';
 import { ProductsService } from 'src/app/core/services/products.service';
@@ -15,6 +15,9 @@ import { Product } from 'src/app/core/models/Product.model';
 export class ProductDetailsComponent implements OnInit, OnDestroy{
 productObs = this.productsService.productByIdObs$;
 similarProductsObs = this.productsService.listProducts$; 
+categoriesObs = this.productsService.listCategories$;
+categories!:any[];
+categoriesSubscription!:Subscription;
 productSubscription!:Subscription;
 itemStatus = ADDING_TO_CART_STATUS.Not_Added;
 currentPage=0;
@@ -23,8 +26,9 @@ constructor(private productsService:ProductsService,
   private activatedRoute:ActivatedRoute,
   private _location:Location){}
 ngOnInit(): void {
+  this.productsService.listAllCategories();
   this.activatedRoute.snapshot.params['id'];
- 
+ this.categoriesSubscription= this.categoriesObs.subscribe((res:any[])=>this.categories=res)
  setTimeout(() => {
   this.activatedRoute.params.subscribe((params: Params) => {
     // this.id = params['id'];
@@ -32,12 +36,22 @@ ngOnInit(): void {
   });
  });
 
-  this.productSubscription= this.productObs.subscribe(product=>
+  this.productSubscription= this.categoriesObs.pipe(
+    switchMap(()=> this.productObs)
+  ).subscribe((product=>
     {
-      // if(product)
-      //  this.productsService.listByCategory(product.category) 
+      // console.log(product);
+     let category= this.categories?.find((c) => {
+      return c.name==product?.category?.name
+      })
+      // console.log(category,this.categories,product);
+      
+      if(category)
+       this.productsService.listByCategory(category?._id) 
       }
-    )
+    ))
+  
+  // this.productObs.subscribe
   
    
 }
@@ -63,5 +77,6 @@ goBack(){
 }
 ngOnDestroy(): void {
   this.productSubscription?.unsubscribe();
+  this.categoriesSubscription?.unsubscribe();
 }
 }

@@ -32,20 +32,20 @@ export class ProductsService extends BaseService {
     return this.productByIdSubject.asObservable();
   }
   public listAllCategories() {
+      
     if(!this.categoriesSubject.getValue().length)
-    return (
+   {  (
       this.http
         .get<any>(`${this.backendUrl}/categories`, {
           // headers: this.httpOptions.headers,
         })
         // .pipe((map(( categories: string[])=>categories)))
         .subscribe((categories) => {
-          //  console.log(categories);
-
+          
           this.categoriesSubject.next(categories.data);
         })
-    );
-    return;
+    );}
+    else return;
   }
 
   public listFilteredProducts(filters?: any) {
