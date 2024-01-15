@@ -50,7 +50,7 @@
       <p-tag (click)="filter=undefined; listAllProducts()" *ngIf="filter" icon="pi pi-times" value="Discounts"></p-tag>
     </div>
   </div>
-  <div *ngIf="showFilters" class="col-lg-2">
+  <div *ngIf="showFilters" class="col-lg-2 col-md-10 col-10 mb-3">
     <p-panelMenu
       [model]="items"
       [style]="{ 'min-width': '200px', 'margin-left': '2rem' }"

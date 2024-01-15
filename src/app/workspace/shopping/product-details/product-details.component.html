@@ -1,7 +1,7 @@
 
 <div class="row" style="background-color: #f4f4f4;" *ngIf="productObs | async as product">
   <div class="back" (click)="goBack()" ><i style="font-size: 2rem;" class=" pi pi-chevron-left" ></i>{{ " back" }}</div><br>
-  <div style="display: flex" class="col-lg-7 col-sm-12">
+  <div  class="col-lg-7 col-sm-12 images">
     <div class="product-imgs">
       <div *ngFor="let image of product.images;let i=index" (mouseenter)="changeImage($event,i)"  class="small-img" >
         <img loading="lazy" [src]="image" [alt]="" class="w-6 shadow-2" />

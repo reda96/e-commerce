@@ -16,6 +16,9 @@
 .content {
   width: 500px;
 }
+.images {
+  display: flex;
+}
 .small-img {
   padding: 2px;
 
@@ -78,3 +81,12 @@
   
     }
 }
+@media only screen and (max-width: 500px) {  
+  .images {
+    flex-direction: column;
+  }
+  .product-imgs {
+    display: flex;
+    justify-content: center;
+  }
+  }
