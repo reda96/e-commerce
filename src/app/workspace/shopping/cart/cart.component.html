@@ -1,6 +1,6 @@
 <div class="p-3" style="background-color: #f4f4f4">
-  <div class="back" (click)="goBack()">
-    <i style="font-size: 2rem" class="pi pi-chevron-left"></i>{{ " back" }}
+  <div class="mx-1 back" (click)="goBack()">
+    <i  class="pi pi-chevron-left"></i>{{ " back" }}
   </div>
   <br />
 
@@ -16,7 +16,7 @@
             (onChange)="deselectAll($event)"
           ></p-checkbox>
         </div>
-
+        <ng-container *ngIf="firstCartItems?.length; else noProducts" >
         <div  *ngFor="let product of firstCartItems"    class="items d-flex  cart-item mt-2"
         >
          
@@ -69,13 +69,19 @@
             </div>
           </div>
         </div>
+      </ng-container>
+      <ng-template #noProducts>
+        <div class="noProducts cart-item mt-2" >
+            There are no products in your cart
+        </div>
+    </ng-template>
       </div>
       <div class="col-xl-4 col-12 col-sm-12">
         <div class="cart-item p-2">
           <h4>Order Summary</h4>
           <h4 style="text-align: end">{{ cart.totalCartPrice }} EGP</h4>
 
-          <button (click)="goToPaymentToken(cart)" class="btn primary-btn">
+          <button [disabled]="!cart.cartItems.length" (click)="goToPaymentToken(cart)" class="btn primary-btn">
             Checkout Now
           </button>
         </div>

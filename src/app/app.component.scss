@@ -1,3 +1,17 @@
+
+.loading {
+  // width: 100vw;
+  // height: 100%;
+  pointer-events: none;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+}
+.layout {
+ max-width: 100%;
+ overflow: hidden;
+}
 .progress-spinner {
     position: fixed;
     z-index: 999;

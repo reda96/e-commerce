@@ -104,7 +104,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    // this.productsService.listAllCategories();
+    this.productsService.listAllCategories();
     let state: any = this._location.getState();
     
     this.sortBy = state?.sortBy
