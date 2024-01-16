@@ -1,7 +1,9 @@
 <div class="card">
-  <!-- [circular]="true"
-  [autoplayInterval]="2000" -->
-  <p-carousel [value]="products" [numVisible]="1" [responsiveOptions]="responsiveOptions" 
+
+  <p-carousel [value]="products" 
+  [circular]="true"
+  [autoplayInterval]="2000"
+  [numVisible]="1" [responsiveOptions]="responsiveOptions" 
 
     contentClass="content">
     <ng-template let-product pTemplate="item">
