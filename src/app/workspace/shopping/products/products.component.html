@@ -3,7 +3,7 @@
   
   *ngIf="products || (productsObs | async) as products"
 >
-  <div [style]="{'margin-right':'1rem'}"  class=" mt-4 mb-3   d-flex  justify-content-end">
+  <div [style]="{ 'margin-right':'1rem' }"  class=" mt-4 mb-3   d-flex  justify-content-end">
     <!-- <span class="mt-2 mx-3" >sortBy</span> -->
     <p-dropdown
       [style]="{ width: '270px' }"
@@ -33,7 +33,7 @@
 
     </ul>
   </div>   -->
-  <div class="col-12   mb-3" style="margin-left: 2rem;" >
+  <div class="   mb-3" style="margin:auto;width: 95%;" >
     <div class=" " (click)="showFilters = !showFilters">
       <i class="pi pi-filter"></i>
       {{ showFilters ? "Hide Filters" : "Show Filters" }}
