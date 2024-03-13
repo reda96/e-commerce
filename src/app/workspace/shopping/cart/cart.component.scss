@@ -1,4 +1,6 @@
+
 .cart-item {
+    border-radius: 5px;
     border-bottom: 1px solid #e5e5e5; 
     padding: 16px 16px 12px;
     background: #fff;
@@ -12,6 +14,7 @@
     }
 
 }
+
 .primary-btn {
     width: 100%;
     
@@ -23,4 +26,24 @@
 }
 h6:hover {
     color: black;
+}
+.row div:nth-child(2) {
+    .cart-item{
+        margin: 0 0.5rem ;
+        padding: 0  0.5rem ;
+    }}
+@media only screen and (max-width: 1200px) {  
+
+    .row div:nth-child(2) {
+        .cart-item{
+            margin: 0.5rem 0;
+            padding: 0.5rem 0.5rem ;
+        }
+        
+    }
+}
+@media only screen and (max-width: 500px) {  
+.items {
+  flex-direction: column;
+}
 }

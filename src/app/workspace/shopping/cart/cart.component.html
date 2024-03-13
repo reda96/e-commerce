@@ -1,81 +1,124 @@
 <div class="p-3" style="background-color: #f4f4f4">
-    <div class="back" (click)="goBack()" ><i style="font-size: 2rem;" class=" pi pi-chevron-left" ></i>{{ " back" }}</div><br>
+  <div class="mx-1 back" (click)="goBack()">
+    <i  class="pi pi-chevron-left"></i>{{ " back" }}
+  </div>
+  <br />
 
-  
   <ng-container *ngIf="cartObs | async as cart">
-  <div class="d-flex">
-    <div class="col-8">
-      <div class="d-flex cart-item">
-        <p-checkbox
-          [ngModel]="firstCartItems?.length==cart.cartItems.length"
-          [binary]="true"
-          inputId="binary"
-          label="All Items"
-          (onChange)="deselectAll($event)"
-        ></p-checkbox>
-      </div>
-     
-        <div *ngFor="let product of firstCartItems" class="d-flex  cart-item mt-2">
-     
+    <div class="row justify-content-between">
+      <div class="col-xl-8 col-12 col-12 mb-2">
+        <div class="d-flex cart-item">
           <p-checkbox
-            
-            [ngModel]="cart.cartItems | arrayInlcudes: product"
+            [ngModel]="firstCartItems?.length == cart.cartItems.length"
+            [binary]="true"
+            inputId="binary"
+            label="All Items"
+            (onChange)="deselectAll($event)"
+          ></p-checkbox>
+        </div>
+        <ng-container *ngIf="firstCartItems?.length; else noProducts" >
+        <div  *ngFor="let product of firstCartItems"    class="items d-flex  cart-item mt-2"
+        >
+         
+          <div class="d-flex col">
+            <p-checkbox
+            [ngModel]="cart.cartItems | arrayInlcudes : product"
             [binary]="true"
             (onChange)="changeSelection($event, product, cart.cartItems)"
           ></p-checkbox>
-          <div class="  mx-3" >
-            <img loading="lazy" [src]="product.images[0]" [alt]="" class="" />
-        </div>
-        <h6 [style]="{ 'cursor':'pointer' }" [routerLink]="['/item/',product.id]" class="col-5" >{{ product.title }}</h6>
-          <div class=" ">
-           
-            <div class="" >
-              <span>{{ product.price }} EGP</span>
-              <div class="ml-2 d-flex">
-                <p-inputNumber
-                  [(ngModel)]="product.quantity"
-                  [showButtons]="true"
-                  buttonLayout="horizontal"
-                  spinnerMode="horizontal"
-                  inputId="horizontal"
-                  (onInput)="updateCartItemQuantity($event,product)"
-                  
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                ></p-inputNumber>
-                <ng-container *ngIf="loggedInUser | async as user" >
-                  <i class="mt-3 mx-2 pi pi-heart-fill" *ngIf="user?.wishlist?.includes(product.id); else:empty "  (click)="removeFromFavorites(product)" ></i>
-   
-                  <ng-template #empty>
-                  <i class= "mt-3 mx-2 pi pi-heart" (click)="addToFavorites(product)" ></i>
-              
-                  </ng-template>
-                </ng-container>
-                <i class="mt-3 mx-2 pi pi-trash" (click)="deleteItem(product,cart.cartItems)" ></i>
+            <img loading="lazy" [src]="product.images[0]" [alt]="" class="mx-3" />
+          </div>
+          <h6  class="col"
+            [style]="{ cursor: 'pointer' }"
+            [routerLink]="['/item/', product.id]"
+          >
+            {{ product.title }}
+          </h6>
 
-              </div>
+          <div class="col">
+            <span class="text-align-center">{{ product.price }} EGP</span>
+            <div class="ml-2 d-flex justify-content-center">
+              <p-inputNumber
+                [(ngModel)]="product.quantity"
+                [showButtons]="true"
+                buttonLayout="horizontal"
+                spinnerMode="horizontal"
+                inputId="horizontal"
+                (onInput)="updateCartItemQuantity($event, product)"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+              ></p-inputNumber>
+              <ng-container *ngIf="loggedInUser | async as user">
+                <i
+                  class="mt-3 mx-2 pi pi-heart-fill"
+                  *ngIf="user?.wishlist?.includes(product.id); else empty"
+                  (click)="removeFromFavorites(product)"
+                ></i>
+
+                <ng-template #empty>
+                  <i
+                    class="mt-3 mx-2 pi pi-heart"
+                    (click)="addToFavorites(product)"
+                  ></i>
+                </ng-template>
+              </ng-container>
+              <i
+                class="mt-3 mx-2 pi pi-trash"
+                (click)="deleteItem(product, cart.cartItems)"
+              ></i>
             </div>
           </div>
         </div>
-    </div>
-    <div class="">
-        <div class="cart-item mx-2 mb-2">
-            <h4>Order Summary</h4>
-            <h4 style="text-align: end;" >{{cart.totalCartPrice}}   EGP</h4>
-
-            <button (click)="goToPaymentToken(cart)" class=" btn primary-btn"  >Checkout Now </button>
+      </ng-container>
+      <ng-template #noProducts>
+        <div class="noProducts cart-item mt-2" >
+            There are no products in your cart
         </div>
-        <div class="cart-item mx-2 mb-2">
-            <h4>We Accept</h4>
-            <img loading="lazy" class="payment-icon" src="/assets/images/payment-icon/1.png" alt="">
-            <img loading="lazy" class="payment-icon" src="/assets/images/payment-icon/2.png" alt="">
-            <img loading="lazy"class="payment-icon" src="/assets/images/payment-icon/3.png" alt="">
-            <img loading="lazy"class="payment-icon" src="/assets/images/payment-icon/5.png" alt="">
-            <img loading="lazy" class="payment-icon" src="/assets/images/payment-icon/7.png" alt="">
+    </ng-template>
+      </div>
+      <div class="col-xl-4 col-12 col-sm-12">
+        <div class="cart-item p-2">
+          <h4>Order Summary</h4>
+          <h4 style="text-align: end">{{ cart.totalCartPrice }} EGP</h4>
 
+          <button [disabled]="!cart.cartItems.length" (click)="goToPaymentToken(cart)" class="btn primary-btn">
+            Checkout Now
+          </button>
         </div>
+        <div class="cart-item mt-2">
+          <h4>We Accept</h4>
+          <img
+            loading="lazy"
+            class="payment-icon"
+            src="/assets/images/payment-icon/1.png"
+            alt=""
+          />
+          <img
+            loading="lazy"
+            class="payment-icon"
+            src="/assets/images/payment-icon/2.png"
+            alt=""
+          />
+          <img
+            loading="lazy"
+            class="payment-icon"
+            src="/assets/images/payment-icon/3.png"
+            alt=""
+          />
+          <img
+            loading="lazy"
+            class="payment-icon"
+            src="/assets/images/payment-icon/5.png"
+            alt=""
+          />
+          <img
+            loading="lazy"
+            class="payment-icon"
+            src="/assets/images/payment-icon/7.png"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
-  </div>
-</ng-container>
-
+  </ng-container>
 </div>

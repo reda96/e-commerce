@@ -1,3 +1,9 @@
+header .p-menu.p-menu-overlay {
+  
+  top: 40px !important;
+  display: block;
+}
+
 .card {
   .p-carousel {
     background-image: url("../images/bg1.jpg");
@@ -13,6 +19,8 @@
 .imgs_container {
   width: 90%;
   text-align: center;
+  min-width: 280px;
+  margin-top: 0.5rem;
 }
 .p-rating-icon-active {
   color: black !important;
@@ -156,7 +164,11 @@
 
 @media only screen and (max-width: 500px)  {
   .card  .p-carousel {
-    
+    background-size: cover;
+    .p-carousel-container {
+      height: auto;
+    }
+    position: relative;
     .item {
     display: flex;
     flex-direction: column;

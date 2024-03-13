@@ -1,7 +1,7 @@
 
 <!-- <router-outlet></router-outlet> -->
 <ng-container *ngIf="spinnerObs | async as  loading">
-    <div >
+    <div  >
    <div class="ring">
      <span></span>
    </div>
@@ -9,11 +9,13 @@
    
     </div> 
    </ng-container>
-<ng-container   >
+   <div class="layout" [ngClass]="{'loading': spinnerObs | async}"  >
+<ng-container  >
   <app-main-layout>
 <router-outlet></router-outlet>
 
   </app-main-layout></ng-container>
+</div>
   <!-- <ng-template #auth >
     <app-login></app-login>
   </ng-template> -->

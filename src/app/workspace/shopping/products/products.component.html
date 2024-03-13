@@ -1,9 +1,9 @@
 <div
   class="row align-items-start products justify-content-center"
-  style="margin-left: 4rem"
+  
   *ngIf="products || (productsObs | async) as products"
 >
-  <div [style]="{'margin-right':'2rem'}" class="col-12 mt-4 mb-3   d-flex justify-content-end">
+  <div [style]="{ 'margin-right':'1rem' }"  class=" mt-4 mb-3   d-flex  justify-content-end">
     <!-- <span class="mt-2 mx-3" >sortBy</span> -->
     <p-dropdown
       [style]="{ width: '270px' }"
@@ -33,13 +33,13 @@
 
     </ul>
   </div>   -->
-  <div class="col-12 d-flex mb-3">
-    <div class="col-3" (click)="showFilters = !showFilters">
+  <div class="   mb-3" style="margin:auto;width: 95%;" >
+    <div class=" " (click)="showFilters = !showFilters">
       <i class="pi pi-filter"></i>
       {{ showFilters ? "Hide Filters" : "Show Filters" }}
     </div>
 
-    <div *ngIf="filter || currentCategory !== 'all'" class="col-9">
+    <div *ngIf="filter || currentCategory !== 'all'" class="">
       Selected Filters:
       <p-tag
         *ngIf="currentCategory !== 'all'"
@@ -50,13 +50,13 @@
       <p-tag (click)="filter=undefined; listAllProducts()" *ngIf="filter" icon="pi pi-times" value="Discounts"></p-tag>
     </div>
   </div>
-  <div *ngIf="showFilters" class="col-lg-2">
+  <div *ngIf="showFilters" class="col-lg-2 col-md-10 col-10 mb-3">
     <p-panelMenu
       [model]="items"
-      [style]="{ 'min-width': '200px', 'margin-left': '2rem' }"
+      [style]="{ 'min-width': '200px', 'width':'90%', 'margin': 'auto' }"
     ></p-panelMenu>
   </div>
-  <div [ngClass]="showFilters ? 'col-lg-10' : 'col-lg-12'">
+  <div [ngClass]="showFilters ? 'col-lg-9' : 'col-lg-12'">
     <app-products-grid [products]="products"></app-products-grid>
   </div>
 </div>

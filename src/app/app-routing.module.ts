@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoggedInAuthGuard } from './core/guards/loggedIn.guard';
 
@@ -38,9 +38,14 @@ const routes: Routes = [
       ),
   },
 ];
+const extraOptions: ExtraOptions = {
+  enableTracing: false,
+  onSameUrlNavigation: 'reload',
+  useHash: true,
+};
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,extraOptions)],
   exports: [RouterModule],
   providers:[LoggedInAuthGuard]
 })

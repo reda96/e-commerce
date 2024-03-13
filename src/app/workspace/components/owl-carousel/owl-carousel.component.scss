@@ -13,6 +13,10 @@ h2,h6 {
     width: 40%;
     text-wrap: balance;
 
+    a::after {
+        content: none;
+    }
+
 }
 .primary-btn {
     display: inline-block;

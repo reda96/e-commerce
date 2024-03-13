@@ -6,6 +6,7 @@ import { ADDING_TO_CART_STATUS } from 'src/app/core/constants/enums';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { Product } from 'src/app/core/models/Product.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,6 +16,7 @@ import { Product } from 'src/app/core/models/Product.model';
 export class ProductDetailsComponent implements OnInit, OnDestroy{
 productObs = this.productsService.productByIdObs$;
 similarProductsObs = this.productsService.listProducts$; 
+loggedUserObs = this.authService.loggedInUserObs$;
 categoriesObs = this.productsService.listCategories$;
 categories!:any[];
 categoriesSubscription!:Subscription;
@@ -23,6 +25,7 @@ itemStatus = ADDING_TO_CART_STATUS.Not_Added;
 currentPage=0;
 constructor(private productsService:ProductsService,
   private cartService:CartService,
+  private authService:AuthService,
   private activatedRoute:ActivatedRoute,
   private _location:Location){}
 ngOnInit(): void {
@@ -74,6 +77,15 @@ addToCart(product:Product){
 }
 goBack(){
   this._location.back()
+}
+
+addToFavorites(item:Product){
+  this.productsService.addToFavorites(item);
+  // this.authService.validateToken();
+}
+removeFromFavorites(item:Product){
+  this.productsService.removeFromFavorites(item);
+  // this.authService.validateToken();
 }
 ngOnDestroy(): void {
   this.productSubscription?.unsubscribe();

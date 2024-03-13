@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/core/services/orders.service';
 
@@ -8,10 +9,14 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 })
 export class YourOrdersComponent implements OnInit {
    ordersObs = this.ordersService.orders$;
-  constructor(private ordersService:OrdersService){}
+  constructor(private ordersService:OrdersService,
+    private location:LocationStrategy){}
 
   ngOnInit(): void {
     window.scroll(0,0)
     this.ordersService.getOrdersOfSpecificUser();
+  }
+  goBack(){
+    this.location.back()
   }
 }

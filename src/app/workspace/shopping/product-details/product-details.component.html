@@ -1,7 +1,7 @@
 
 <div class="row" style="background-color: #f4f4f4;" *ngIf="productObs | async as product">
-  <div class="back" (click)="goBack()" ><i style="font-size: 2rem;" class=" pi pi-chevron-left" ></i>{{ " back" }}</div><br>
-  <div style="display: flex" class="col-lg-7 col-sm-12">
+  <div class="back mx-1" (click)="goBack()" ><i  class=" pi pi-chevron-left" ></i>{{ " back" }}</div><br>
+  <div  class="col-lg-7 col-sm-12 images">
     <div class="product-imgs">
       <div *ngFor="let image of product.images;let i=index" (mouseenter)="changeImage($event,i)"  class="small-img" >
         <img loading="lazy" [src]="image" [alt]="" class="w-6 shadow-2" />
@@ -40,7 +40,17 @@
   <div class="col-lg-4 col-sm-12">
     <div class="d-flex justify-content-between">
       <h5    >{{product.title}} </h5>
-      <i class="pi pi-heart like" ></i>
+     
+
+      <i
+      class="pi pi-heart-fill like"
+      *ngIf="(loggedUserObs | async)?.wishlist?.includes(product.id); else empty"
+      (click)="removeFromFavorites(product)"
+    ></i>
+
+    <ng-template #empty>
+      <i class="pi pi-heart like" (click)="addToFavorites(product)"></i>
+    </ng-template>
     </div>
     <h6 [ngStyle]="{'text-decoration':product?.priceAfterDiscount? 'line-through':'none'}" >{{product.price}} EGP</h6>
     <ng-container *ngIf="product?.priceAfterDiscount" > <h6 class="discount" >{{product.priceAfterDiscount}} EGP  <span *ngIf="(product.price&&product.priceAfterDiscount)" class="percentage">-{{((product.price-product.priceAfterDiscount)/product.price)*100 | number:'1.1-2' }} %</span></h6></ng-container>
