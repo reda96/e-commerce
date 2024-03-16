@@ -6,10 +6,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class SpinnerService  {
   showSpinner = false;
-  private spinnerSubject: BehaviorSubject<boolean>;
+  private spinnerSubject!: BehaviorSubject<boolean>;
 
   constructor() {
-    this.spinnerSubject = new BehaviorSubject<boolean>(false);
+   
+  }
+  public  initializeSpinner(value:boolean){
+    this.spinnerSubject = new BehaviorSubject<boolean>(value);
   }
 
   get spinnerState$(): Observable<boolean> {
@@ -21,12 +24,12 @@ export class SpinnerService  {
   public show() {
     // console.log("giSpinnerHw show called");
     // console.log(true);
-    this.spinnerSubject.next(true);
+    this.spinnerSubject?.next(true);
   }
 
   public hide() {
     // console.log("giSpinnerHw hide called");
     // console.log(false);
-    this.spinnerSubject.next(false);
+    this.spinnerSubject?.next(false);
   }
 }

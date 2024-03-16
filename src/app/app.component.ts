@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewInit, Component } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpinnerService } from './core/services/loading.service';
 import { User } from './core/models/user.model';
@@ -9,22 +9,25 @@ import { AuthService } from './core/services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit  {
+export class AppComponent implements OnChanges {
   title = 'e-commerce';
-  spinnerObs!:Observable<boolean>;
-  loggedInUserObs:Observable<User | undefined>= this.authService.loggedInUserObs$; ;
+  spinnerObs!: Observable<boolean>;
+  loggedInUserObs: Observable<User | undefined> = this.authService.loggedInUserObs$;;
 
-  constructor(private spinnerService:SpinnerService, 
-    private authService:AuthService){
-      setTimeout(() => {
-       this.spinnerObs=this.spinnerService.spinnerState$;
-    });
-    
-    }
+  constructor(private spinnerService: SpinnerService,
+    private authService: AuthService) {
+    //   setTimeout(() => {
+    //    this.spinnerObs=this.spinnerService.spinnerState$;
+    // });
 
-    ngAfterViewInit(){
-      setTimeout(() => {
-        this.spinnerObs=this.spinnerService.spinnerState$;
-     });
-    }
+  }
+
+
+  ngOnChanges(): void {
+
+
+    this.spinnerService.initializeSpinner(false);
+    this.spinnerObs = this.spinnerService.spinnerState$;
+
+  }
 }
